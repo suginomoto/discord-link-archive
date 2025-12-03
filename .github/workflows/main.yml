@@ -32,16 +32,17 @@ jobs:
         env:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
           TARGET_THREAD_ID: ${{ secrets.TARGET_THREAD_ID }}
-          # 必要に応じてその他のIDも追加
 
       # 2. GitHub Pagesへのデプロイ
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./ # index.htmlとdataフォルダをデプロイ
+          publish_dir: ./ # プロジェクトルートから必要なファイルをデプロイ
           publish_branch: gh-pages # GitHub Pages用のブランチ
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
           commit_message: 'Deploy Discord links archive'
           force_orphan: true # 履歴を保持せず、常に新しいコミットを作成
+          # デプロイから除外するファイル・フォルダを指定
+          exclude_assets: '.github,node_modules,fetch_links.js,generate_page.js,package.json,package-lock.json,.gitignore,README.md'
