@@ -1,0 +1,42 @@
+name: Deploy Discord Links to GitHub Pages
+
+on:
+  # 毎朝 08:00 (UTC) に実行
+  schedule:
+    - cron: '0 8 * * *' 
+  # 手動実行を可能にする
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      # 1. スクリプトの実行と環境変数の設定
+      - name: Run fetch and generate scripts
+        run: npm run build
+        env:
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          TARGET_THREAD_ID: ${{ secrets.TARGET_THREAD_ID }}
+          # 必要に応じてその他のIDも追加
+
+      # 2. GitHub Pagesへのデプロイ
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./ # index.htmlとdataフォルダをデプロイ
+          publish_branch: gh-pages # GitHub Pages用のブランチ
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: 'Deploy Discord links archive'

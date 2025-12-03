@@ -1,0 +1,378 @@
+const fs = require('fs');
+const path = require('path');
+
+/**
+ * 日付を読みやすい形式にフォーマットする関数
+ * @param {string} isoString - ISO 8601形式の日付文字列
+ * @returns {string} - フォーマットされた日付文字列
+ */
+function formatDate(isoString) {
+    const date = new Date(isoString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+
+    return `${year}/${month}/${day} ${hours}:${minutes}`;
+}
+
+/**
+ * URLからドメイン名を抽出する関数
+ * @param {string} url - URL文字列
+ * @returns {string} - ドメイン名
+ */
+function extractDomain(url) {
+    try {
+        const urlObj = new URL(url);
+        return urlObj.hostname;
+    } catch (error) {
+        return 'unknown';
+    }
+}
+
+/**
+ * HTMLテンプレートを生成する関数
+ * @param {Object[]} links - リンク情報の配列
+ * @returns {string} - 完全なHTML文字列
+ */
+function generateHTML(links) {
+    const linkItems = links.map(link => `
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="${link.author.avatar}" alt="${link.author.displayName}" class="avatar">
+          <span class="author-name">${link.author.displayName}</span>
+        </div>
+        <span class="timestamp">${formatDate(link.timestamp)}</span>
+      </div>
+      <div class="link-content">
+        <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="link-url">
+          ${link.url}
+        </a>
+        <span class="domain">${extractDomain(link.url)}</span>
+      </div>
+      ${link.content ? `<div class="message-excerpt">${escapeHtml(link.content)}</div>` : ''}
+      ${link.hasAttachments ? `<div class="attachments-badge">📎 ${link.attachmentCount} 個の添付ファイル</div>` : ''}
+    </li>
+  `).join('');
+
+    return `<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discord Link Archive</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-primary: #0f0f23;
+      --bg-secondary: #1a1a2e;
+      --bg-card: #16213e;
+      --accent-primary: #4a9eff;
+      --accent-secondary: #7b68ee;
+      --text-primary: #e4e4e7;
+      --text-secondary: #a1a1aa;
+      --border-color: #27272a;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding: 2rem;
+      background: var(--bg-card);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-color);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-top: 0.25rem;
+    }
+
+    .links-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .link-item {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+    }
+
+    .link-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 12px -2px rgba(0, 0, 0, 0.4), 0 4px 8px -2px rgba(0, 0, 0, 0.3);
+      border-color: var(--accent-primary);
+    }
+
+    .link-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid var(--accent-primary);
+    }
+
+    .author-name {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .timestamp {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .link-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .link-url {
+      color: var(--accent-primary);
+      text-decoration: none;
+      font-weight: 500;
+      word-break: break-all;
+      transition: color 0.2s ease;
+    }
+
+    .link-url:hover {
+      color: var(--accent-secondary);
+      text-decoration: underline;
+    }
+
+    .domain {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      background: var(--bg-secondary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 6px;
+      width: fit-content;
+    }
+
+    .message-excerpt {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      padding: 0.75rem;
+      background: var(--bg-secondary);
+      border-radius: 8px;
+      border-left: 3px solid var(--accent-primary);
+      margin-top: 0.5rem;
+    }
+
+    .attachments-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--accent-secondary);
+      background: rgba(123, 104, 238, 0.1);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      width: fit-content;
+      margin-top: 0.5rem;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 2rem;
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 1rem 0.5rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .link-item {
+        padding: 1rem;
+      }
+
+      .stats {
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🔗 Discord Link Archive</h1>
+      <p class="subtitle">スレッドで共有されたリンク集</p>
+      <div class="stats">
+        <div class="stat-item">
+          <div class="stat-number">${links.length}</div>
+          <div class="stat-label">リンク数</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">${getUniqueAuthorsCount(links)}</div>
+          <div class="stat-label">投稿者数</div>
+        </div>
+      </div>
+    </header>
+
+    <ul class="links-list">
+      ${linkItems}
+    </ul>
+
+    <footer>
+      <p>最終更新: ${new Date().toLocaleString('ja-JP')}</p>
+      <p>Generated by Discord Link Archive</p>
+    </footer>
+  </div>
+</body>
+</html>`;
+}
+
+/**
+ * HTMLエスケープ関数
+ * @param {string} text - エスケープする文字列
+ * @returns {string} - エスケープされた文字列
+ */
+function escapeHtml(text) {
+    const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+    };
+    return text.replace(/[&<>"']/g, m => map[m]);
+}
+
+/**
+ * ユニークな投稿者数を取得する関数
+ * @param {Object[]} links - リンク情報の配列
+ * @returns {number} - ユニークな投稿者数
+ */
+function getUniqueAuthorsCount(links) {
+    const uniqueAuthors = new Set(links.map(link => link.author.id));
+    return uniqueAuthors.size;
+}
+
+/**
+ * メイン処理
+ */
+async function main() {
+    try {
+        console.log('リンクデータを読み込み中...');
+
+        // links.jsonを読み込み
+        const dataPath = path.join(__dirname, 'data', 'links.json');
+
+        if (!fs.existsSync(dataPath)) {
+            console.error(`エラー: ${dataPath} が見つかりません`);
+            console.error('先に fetch_links.js を実行してください');
+            process.exit(1);
+        }
+
+        const jsonData = fs.readFileSync(dataPath, 'utf-8');
+        const links = JSON.parse(jsonData);
+
+        console.log(`${links.length} 件のリンクを読み込みました`);
+
+        // HTMLを生成
+        console.log('HTMLページを生成中...');
+        const html = generateHTML(links);
+
+        // index.htmlに書き出し
+        const outputPath = path.join(__dirname, 'index.html');
+        fs.writeFileSync(outputPath, html, 'utf-8');
+
+        console.log(`HTMLページを ${outputPath} に保存しました`);
+        console.log('処理が完了しました！');
+
+    } catch (error) {
+        console.error('エラーが発生しました:', error);
+        process.exit(1);
+    }
+}
+
+// スクリプトを実行
+main();
