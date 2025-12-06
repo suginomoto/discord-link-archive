@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discord Link Archive</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-primary: #0f0f23;
+      --bg-secondary: #1a1a2e;
+      --bg-card: #16213e;
+      --accent-primary: #4a9eff;
+      --accent-secondary: #7b68ee;
+      --text-primary: #e4e4e7;
+      --text-secondary: #a1a1aa;
+      --border-color: #27272a;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding: 2rem;
+      background: var(--bg-card);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-color);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-top: 0.25rem;
+    }
+
+    .links-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .link-item {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+    }
+
+    .link-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 12px -2px rgba(0, 0, 0, 0.4), 0 4px 8px -2px rgba(0, 0, 0, 0.3);
+      border-color: var(--accent-primary);
+    }
+
+    .link-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid var(--accent-primary);
+    }
+
+    .author-name {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .timestamp {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .link-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .link-url {
+      color: var(--accent-primary);
+      text-decoration: none;
+      font-weight: 500;
+      word-break: break-all;
+      transition: color 0.2s ease;
+    }
+
+    .link-url:hover {
+      color: var(--accent-secondary);
+      text-decoration: underline;
+    }
+
+    .domain {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      background: var(--bg-secondary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 6px;
+      width: fit-content;
+    }
+
+    .message-excerpt {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      padding: 0.75rem;
+      background: var(--bg-secondary);
+      border-radius: 8px;
+      border-left: 3px solid var(--accent-primary);
+      margin-top: 0.5rem;
+    }
+
+    .attachments-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--accent-secondary);
+      background: rgba(123, 104, 238, 0.1);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      width: fit-content;
+      margin-top: 0.5rem;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 2rem;
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 1rem 0.5rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .link-item {
+        padding: 1rem;
+      }
+
+      .stats {
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🔗 Discord Link Archive</h1>
+      <p class="subtitle">スレッドで共有されたリンク集</p>
+      <div class="stats">
+        <div class="stat-item">
+          <div class="stat-number">57</div>
+          <div class="stat-label">リンク数</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">3</div>
+          <div class="stat-label">投稿者数</div>
+        </div>
+      </div>
+    </header>
+
+    <ul class="links-list">
+      
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/12/05 21:14</span>
+      </div>
+      <div class="link-content">
+        <a href="https://github.com/Ebullioscopic/Atoll" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://github.com/Ebullioscopic/Atoll
+        </a>
+        <span class="domain">github.com</span>
+      </div>
+      <div class="message-excerpt">https://github.com/Ebullioscopic/Atoll</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/12/05 08:37</span>
+      </div>
+      <div class="link-content">
+        <a href="https://github.com/TibixDev/winboat" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://github.com/TibixDev/winboat
+        </a>
+        <span class="domain">github.com</span>
+      </div>
+      <div class="message-excerpt">https://github.com/TibixDev/winboat</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/12/04 04:30</span>
+      </div>
+      <div class="link-content">
+        <a href="https://dotenvx.com" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://dotenvx.com
+        </a>
+        <span class="domain">dotenvx.com</span>
+      </div>
+      <div class="message-excerpt">https://dotenvx.com</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/12/04 03:13</span>
+      </div>
+      <div class="link-content">
+        <a href="https://github.com/lapce/lapce" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://github.com/lapce/lapce
+        </a>
+        <span class="domain">github.com</span>
+      </div>
+      <div class="message-excerpt">https://github.com/lapce/lapce</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/1083600474999107634/a_8aaf0459f90203194efb3b6b65031fde.gif" alt="Suginomoto" class="avatar">
+          <span class="author-name">Suginomoto</span>
+        </div>
+        <span class="timestamp">2025/12/03 02:12</span>
+      </div>
+      <div class="link-content">
+        <a href="https://github.com/gotoailab/modern_mermaid" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://github.com/gotoailab/modern_mermaid
+        </a>
+        <span class="domain">github.com</span>
+      </div>
+      <div class="message-excerpt">https://github.com/gotoailab/modern_mermaid</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/1083600474999107634/a_8aaf0459f90203194efb3b6b65031fde.gif" alt="Suginomoto" class="avatar">
+          <span class="author-name">Suginomoto</span>
+        </div>
+        <span class="timestamp">2025/12/02 02:34</span>
+      </div>
+      <div class="link-content">
+        <a href="https://github.com/cafeTechne/Final-Fantasy-CSS" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://github.com/cafeTechne/Final-Fantasy-CSS
+        </a>
+        <span class="domain">github.com</span>
+      </div>
+      <div class="message-excerpt">https://github.com/cafeTechne/Final-Fantasy-CSS</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/12/01 06:41</span>
+      </div>
+      <div class="link-content">
+        <a href="https://github.com/vicinaehq/vicinae" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://github.com/vicinaehq/vicinae
+        </a>
+        <span class="domain">github.com</span>
+      </div>
+      <div class="message-excerpt">https://github.com/vicinaehq/vicinae</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/12/01 06:26</span>
+      </div>
+      <div class="link-content">
+        <a href="https://landonorris.com/" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://landonorris.com/
+        </a>
+        <span class="domain">landonorris.com</span>
+      </div>
+      <div class="message-excerpt">https://landonorris.com/</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/12/01 06:12</span>
+      </div>
+      <div class="link-content">
+        <a href="https://github.com/arkadiyt/zoom-redirector" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://github.com/arkadiyt/zoom-redirector
+        </a>
+        <span class="domain">github.com</span>
+      </div>
+      <div class="message-excerpt">https://github.com/arkadiyt/zoom-redirector</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/30 11:01</span>
+      </div>
+      <div class="link-content">
+        <a href="https://github.com/alvaniss/privacy-dots" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://github.com/alvaniss/privacy-dots
+        </a>
+        <span class="domain">github.com</span>
+      </div>
+      <div class="message-excerpt">https://github.com/alvaniss/privacy-dots</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/29 14:26</span>
+      </div>
+      <div class="link-content">
+        <a href="https://unchihugo.github.io/FluentFlyout/" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://unchihugo.github.io/FluentFlyout/
+        </a>
+        <span class="domain">unchihugo.github.io</span>
+      </div>
+      <div class="message-excerpt">https://unchihugo.github.io/FluentFlyout/</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/26 14:46</span>
+      </div>
+      <div class="link-content">
+        <a href="https://claudish.com/" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://claudish.com/
+        </a>
+        <span class="domain">claudish.com</span>
+      </div>
+      <div class="message-excerpt">https://claudish.com/</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/26 11:38</span>
+      </div>
+      <div class="link-content">
+        <a href="https://proton.me/ja/pass" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://proton.me/ja/pass
+        </a>
+        <span class="domain">proton.me</span>
+      </div>
+      <div class="message-excerpt">https://proton.me/ja/pass</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/26 11:37</span>
+      </div>
+      <div class="link-content">
+        <a href="https://github.com/khcrysalis/PlumeImpactor" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://github.com/khcrysalis/PlumeImpactor
+        </a>
+        <span class="domain">github.com</span>
+      </div>
+      <div class="message-excerpt">https://github.com/khcrysalis/PlumeImpactor</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/25 12:04</span>
+      </div>
+      <div class="link-content">
+        <a href="https://github.com/astral-sh/uv" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://github.com/astral-sh/uv
+        </a>
+        <span class="domain">github.com</span>
+      </div>
+      <div class="message-excerpt">https://github.com/astral-sh/uv</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/24 09:48</span>
+      </div>
+      <div class="link-content">
+        <a href="https://www.graalvm.org/" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://www.graalvm.org/
+        </a>
+        <span class="domain">www.graalvm.org</span>
+      </div>
+      <div class="message-excerpt">https://www.graalvm.org/</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/24 05:01</span>
+      </div>
+      <div class="link-content">
+        <a href="https://windframe.dev/" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://windframe.dev/
+        </a>
+        <span class="domain">windframe.dev</span>
+      </div>
+      <div class="message-excerpt">https://windframe.dev/</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/21 14:47</span>
+      </div>
+      <div class="link-content">
+        <a href="https://github.com/CompassMB/MBCompass" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://github.com/CompassMB/MBCompass
+        </a>
+        <span class="domain">github.com</span>
+      </div>
+      <div class="message-excerpt">https://github.com/CompassMB/MBCompass</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/21 14:21</span>
+      </div>
+      <div class="link-content">
+        <a href="https://antigravity.google/" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://antigravity.google/
+        </a>
+        <span class="domain">antigravity.google</span>
+      </div>
+      <div class="message-excerpt">https://antigravity.google/</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/17 09:27</span>
+      </div>
+      <div class="link-content">
+        <a href="https://github.com/straight-tamago/misaka26" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://github.com/straight-tamago/misaka26
+        </a>
+        <span class="domain">github.com</span>
+      </div>
+      <div class="message-excerpt">https://github.com/straight-tamago/misaka26</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/15 18:33</span>
+      </div>
+      <div class="link-content">
+        <a href="https://github.com/hanakim3945/bl_sbx" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://github.com/hanakim3945/bl_sbx
+        </a>
+        <span class="domain">github.com</span>
+      </div>
+      <div class="message-excerpt">https://github.com/hanakim3945/bl_sbx</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/526294675422838785/1b82c1362dddf27be5c92439d6d41a10.webp" alt="ゴールドレンズ" class="avatar">
+          <span class="author-name">ゴールドレンズ</span>
+        </div>
+        <span class="timestamp">2025/11/14 15:08</span>
+      </div>
+      <div class="link-content">
+        <a href="https://github.com/getumbrel/umbrel/releases" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://github.com/getumbrel/umbrel/releases
+        </a>
+        <span class="domain">github.com</span>
+      </div>
+      <div class="message-excerpt">https://github.com/getumbrel/umbrel/releases</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/14 09:38</span>
+      </div>
+      <div class="link-content">
+        <a href="https://zed.dev/" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://zed.dev/
+        </a>
+        <span class="domain">zed.dev</span>
+      </div>
+      <div class="message-excerpt">https://zed.dev/</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/13 14:03</span>
+      </div>
+      <div class="link-content">
+        <a href="https://cursor.com/ja" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://cursor.com/ja
+        </a>
+        <span class="domain">cursor.com</span>
+      </div>
+      <div class="message-excerpt">https://cursor.com/ja</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/13 09:28</span>
+      </div>
+      <div class="link-content">
+        <a href="https://geph.io/en" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://geph.io/en
+        </a>
+        <span class="domain">geph.io</span>
+      </div>
+      <div class="message-excerpt">https://geph.io/en</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/13 09:27</span>
+      </div>
+      <div class="link-content">
+        <a href="https://github.com/twofas" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://github.com/twofas
+        </a>
+        <span class="domain">github.com</span>
+      </div>
+      <div class="message-excerpt">https://github.com/twofas</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/13 02:28</span>
+      </div>
+      <div class="link-content">
+        <a href="https://lowtechguys.com/clop" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://lowtechguys.com/clop
+        </a>
+        <span class="domain">lowtechguys.com</span>
+      </div>
+      <div class="message-excerpt">https://lowtechguys.com/clop</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/13 02:27</span>
+      </div>
+      <div class="link-content">
+        <a href="https://github.com/maniacx/Bluetooth-Battery-Meter/tree/SONY" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://github.com/maniacx/Bluetooth-Battery-Meter/tree/SONY
+        </a>
+        <span class="domain">github.com</span>
+      </div>
+      <div class="message-excerpt">https://github.com/maniacx/Bluetooth-Battery-Meter/tree/SONY</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/13 02:25</span>
+      </div>
+      <div class="link-content">
+        <a href="https://github.com/pwr-Solaar/Solaar" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://github.com/pwr-Solaar/Solaar
+        </a>
+        <span class="domain">github.com</span>
+      </div>
+      <div class="message-excerpt">https://github.com/pwr-Solaar/Solaar</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/12 12:37</span>
+      </div>
+      <div class="link-content">
+        <a href="https://helium.computer/" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://helium.computer/
+        </a>
+        <span class="domain">helium.computer</span>
+      </div>
+      <div class="message-excerpt">https://helium.computer/</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/12 02:14</span>
+      </div>
+      <div class="link-content">
+        <a href="https://www.oracle.com/jp/cloud/" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://www.oracle.com/jp/cloud/
+        </a>
+        <span class="domain">www.oracle.com</span>
+      </div>
+      <div class="message-excerpt">https://www.oracle.com/jp/cloud/</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/11 07:13</span>
+      </div>
+      <div class="link-content">
+        <a href="https://huggingface.co/WeiboAI/VibeThinker-1.5B" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://huggingface.co/WeiboAI/VibeThinker-1.5B
+        </a>
+        <span class="domain">huggingface.co</span>
+      </div>
+      <div class="message-excerpt">https://huggingface.co/WeiboAI/VibeThinker-1.5B</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/526294675422838785/1b82c1362dddf27be5c92439d6d41a10.webp" alt="ゴールドレンズ" class="avatar">
+          <span class="author-name">ゴールドレンズ</span>
+        </div>
+        <span class="timestamp">2025/11/10 12:40</span>
+      </div>
+      <div class="link-content">
+        <a href="https://www.xrea.com/" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://www.xrea.com/
+        </a>
+        <span class="domain">www.xrea.com</span>
+      </div>
+      <div class="message-excerpt">https://www.xrea.com/</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/10 10:24</span>
+      </div>
+      <div class="link-content">
+        <a href="https://syncthing.net/" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://syncthing.net/
+        </a>
+        <span class="domain">syncthing.net</span>
+      </div>
+      <div class="message-excerpt">https://syncthing.net/</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/08 21:21</span>
+      </div>
+      <div class="link-content">
+        <a href="https://grafana.com/ja/" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://grafana.com/ja/
+        </a>
+        <span class="domain">grafana.com</span>
+      </div>
+      <div class="message-excerpt">https://grafana.com/ja/</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/08 21:21</span>
+      </div>
+      <div class="link-content">
+        <a href="https://jellyfin.org/" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://jellyfin.org/
+        </a>
+        <span class="domain">jellyfin.org</span>
+      </div>
+      <div class="message-excerpt">https://jellyfin.org/</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/08 12:25</span>
+      </div>
+      <div class="link-content">
+        <a href="https://randoma11y.com" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://randoma11y.com
+        </a>
+        <span class="domain">randoma11y.com</span>
+      </div>
+      <div class="message-excerpt">https://randoma11y.com</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/08 12:24</span>
+      </div>
+      <div class="link-content">
+        <a href="https://ublockorigin.com/jp" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://ublockorigin.com/jp
+        </a>
+        <span class="domain">ublockorigin.com</span>
+      </div>
+      <div class="message-excerpt">https://ublockorigin.com/jp</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/08 12:20</span>
+      </div>
+      <div class="link-content">
+        <a href="https://github.com/yt-dlp/yt-dlp" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://github.com/yt-dlp/yt-dlp
+        </a>
+        <span class="domain">github.com</span>
+      </div>
+      <div class="message-excerpt">https://github.com/yt-dlp/yt-dlp</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/08 12:19</span>
+      </div>
+      <div class="link-content">
+        <a href="https://github.com/Vencord/Vesktop" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://github.com/Vencord/Vesktop
+        </a>
+        <span class="domain">github.com</span>
+      </div>
+      <div class="message-excerpt">https://github.com/Vencord/Vesktop</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/08 12:18</span>
+      </div>
+      <div class="link-content">
+        <a href="https://zen-browser.app/" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://zen-browser.app/
+        </a>
+        <span class="domain">zen-browser.app</span>
+      </div>
+      <div class="message-excerpt">https://zen-browser.app/</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/08 12:16</span>
+      </div>
+      <div class="link-content">
+        <a href="https://github.com/Flow-Launcher/Flow.Launcher" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://github.com/Flow-Launcher/Flow.Launcher
+        </a>
+        <span class="domain">github.com</span>
+      </div>
+      <div class="message-excerpt">https://github.com/Flow-Launcher/Flow.Launcher</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/08 12:15</span>
+      </div>
+      <div class="link-content">
+        <a href="https://github.com/itorr/homo" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://github.com/itorr/homo
+        </a>
+        <span class="domain">github.com</span>
+      </div>
+      <div class="message-excerpt">https://github.com/itorr/homo</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/08 12:14</span>
+      </div>
+      <div class="link-content">
+        <a href="https://lab.magiconch.com/homo/" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://lab.magiconch.com/homo/
+        </a>
+        <span class="domain">lab.magiconch.com</span>
+      </div>
+      <div class="message-excerpt">https://lab.magiconch.com/homo/</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/08 12:10</span>
+      </div>
+      <div class="link-content">
+        <a href="https://github.com/dayanch96/YTLite" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://github.com/dayanch96/YTLite
+        </a>
+        <span class="domain">github.com</span>
+      </div>
+      <div class="message-excerpt">https://github.com/dayanch96/YTLite</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/08 12:10</span>
+      </div>
+      <div class="link-content">
+        <a href="https://github.com/NeoFreeBird/app" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://github.com/NeoFreeBird/app
+        </a>
+        <span class="domain">github.com</span>
+      </div>
+      <div class="message-excerpt">https://github.com/NeoFreeBird/app</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/08 10:53</span>
+      </div>
+      <div class="link-content">
+        <a href="https://github.com/yokoffing/Betterfox" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://github.com/yokoffing/Betterfox
+        </a>
+        <span class="domain">github.com</span>
+      </div>
+      <div class="message-excerpt">https://github.com/yokoffing/Betterfox</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/08 10:52</span>
+      </div>
+      <div class="link-content">
+        <a href="https://github.com/GooseMod/OpenAsar" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://github.com/GooseMod/OpenAsar
+        </a>
+        <span class="domain">github.com</span>
+      </div>
+      <div class="message-excerpt">https://github.com/GooseMod/OpenAsar</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/08 10:51</span>
+      </div>
+      <div class="link-content">
+        <a href="https://atlasos.net/" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://atlasos.net/
+        </a>
+        <span class="domain">atlasos.net</span>
+      </div>
+      <div class="message-excerpt">https://atlasos.net/</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/08 10:50</span>
+      </div>
+      <div class="link-content">
+        <a href="https://github.com/moudey/shell" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://github.com/moudey/shell
+        </a>
+        <span class="domain">github.com</span>
+      </div>
+      <div class="message-excerpt">https://github.com/moudey/shell</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/08 10:49</span>
+      </div>
+      <div class="link-content">
+        <a href="https://gopeed.com/" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://gopeed.com/
+        </a>
+        <span class="domain">gopeed.com</span>
+      </div>
+      <div class="message-excerpt">https://gopeed.com/</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/08 10:47</span>
+      </div>
+      <div class="link-content">
+        <a href="https://github.com/emoacht/Monitorian" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://github.com/emoacht/Monitorian
+        </a>
+        <span class="domain">github.com</span>
+      </div>
+      <div class="message-excerpt">https://github.com/emoacht/Monitorian</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/08 10:46</span>
+      </div>
+      <div class="link-content">
+        <a href="https://controld.com/free-dns" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://controld.com/free-dns
+        </a>
+        <span class="domain">controld.com</span>
+      </div>
+      <div class="message-excerpt">https://controld.com/free-dns</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/08 10:46</span>
+      </div>
+      <div class="link-content">
+        <a href="https://nextdns.io/" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://nextdns.io/
+        </a>
+        <span class="domain">nextdns.io</span>
+      </div>
+      <div class="message-excerpt">https://nextdns.io/</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/08 10:41</span>
+      </div>
+      <div class="link-content">
+        <a href="https://cobalt.meowing.de/" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://cobalt.meowing.de/
+        </a>
+        <span class="domain">cobalt.meowing.de</span>
+      </div>
+      <div class="message-excerpt">https://cobalt.meowing.de/</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/08 10:37</span>
+      </div>
+      <div class="link-content">
+        <a href="https://localsend.org/ja" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://localsend.org/ja
+        </a>
+        <span class="domain">localsend.org</span>
+      </div>
+      <div class="message-excerpt">https://localsend.org/ja</div>
+      
+    </li>
+  
+    <li class="link-item">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <span class="timestamp">2025/11/08 10:37</span>
+      </div>
+      <div class="link-content">
+        <a href="https://www.cube-soft.jp/cubeice/" target="_blank" rel="noopener noreferrer" class="link-url">
+          https://www.cube-soft.jp/cubeice/
+        </a>
+        <span class="domain">www.cube-soft.jp</span>
+      </div>
+      <div class="message-excerpt">https://www.cube-soft.jp/cubeice/</div>
+      
+    </li>
+  
+    </ul>
+
+    <footer>
+      <p>最終更新: 2025/12/6 8:15:30</p>
+      <p>Generated by Discord Link Archive</p>
+    </footer>
+  </div>
+</body>
+</html>
