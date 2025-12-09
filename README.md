@@ -12,7 +12,7 @@ Discordスレッドで共有されたリンクを自動収集し、美しいWeb�
 - **スクリーンショット**: リンク先のプレビュー画像を自動キャプチャ（Puppeteer使用）
 - **タグ自動生成**: コンテンツを分析して自動的にタグ付け
 - **タグフィルター**: タグをクリックして関連リンクを絞り込み表示
-- **グリッドレイアウト**: 1行4つのカード形式で見やすく表示（レスポンシブ対応）
+- **グリッドレイアウト**: 1行4つのカード形式で見やすく表示（画面サイズに応じて自動調整: デスクトップ4列、タブレット2-3列、モバイル1列）
 - **多言語対応**: 説明文を日本語に自動翻訳
 - **モダンなデザイン**: ダークモード対応のプレミアムなUI
 - **詳細な統計情報**: リンク数、投稿者数、タグ数、ドメイン数を表示
@@ -107,6 +107,46 @@ discord-link-archive/
 ├── index.html                    # 生成されたWebページ
 └── package.json                  # プロジェクト設定
 ```
+
+## トラブルシューティング
+
+### GitHub Actionsでのビルドエラー
+
+#### `libasound2` パッケージが見つからない
+
+Ubuntu 24.04では、`libasound2` パッケージ名が `libasound2t64` に変更されています。
+
+**解決済み**: 本プロジェクトの `.github/workflows/main.yml` では既に対応済みです。
+
+以下のパッケージがインストールされます:
+- `libnss3`
+- `libatk-bridge2.0-0`
+- `libdrm2`
+- `libxkbcommon0`
+- `libgbm1`
+- `libasound2t64` ← Ubuntu 24.04対応
+- `libgtk-3-0`
+- `libxshmfence1`
+- `libglu1-mesa`
+
+### ローカルでのPuppeteerエラー
+
+ローカル環境でスクリーンショット取得時にエラーが発生する場合:
+
+**Linux (Ubuntu/Debian)**:
+```bash
+sudo apt-get update
+sudo apt-get install -y chromium-browser
+# または上記のパッケージリストを手動インストール
+```
+
+**macOS**:
+```bash
+brew install chromium
+```
+
+**Windows**:
+Puppeteerが自動的にChromiumをダウンロードするため、通常は追加設定不要です。
 
 ## 今後の予定
 
