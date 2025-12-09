@@ -107,10 +107,10 @@ function generateHTML(links) {
       </div>
       ${link.descriptionJa ? `<div class="description">${escapeHtml(link.descriptionJa)}</div>` : ''}
       ${link.content ? `<div class="message-excerpt">${escapeHtml(link.content)}</div>` : ''}
-      ${link.screenshot ? `
+      ${(link.image || link.screenshot) ? `
       <details class="screenshot-container">
         <summary class="screenshot-toggle">スクリーンショットを表示</summary>
-        <img src="${link.screenshot}" alt="Screenshot of ${link.url}" class="screenshot" loading="lazy">
+        <img src="${link.image || link.screenshot}" alt="Screenshot of ${link.url}" class="screenshot" loading="lazy">
       </details>
       ` : ''}
       ${link.hasAttachments ? `<div class="attachments-badge">📎 ${link.attachmentCount} 個の添付ファイル</div>` : ''}
