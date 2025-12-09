@@ -24,7 +24,11 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm install
+          # Puppeteerの依存関係をインストール
+          sudo apt-get update
+          sudo apt-get install -y libnss3 libatk-bridge2.0-0 libdrm2 libxkbcommon0 libgbm1 libasound2
 
       # 1. スクリプトの実行と環境変数の設定
       - name: Run fetch and generate scripts
@@ -45,4 +49,4 @@ jobs:
           commit_message: 'Deploy Discord links archive'
           force_orphan: true # 履歴を保持せず、常に新しいコミットを作成
           # デプロイから除外するファイル・フォルダを指定
-          exclude_assets: '.github,node_modules,fetch_links.js,generate_page.js,package.json,package-lock.json,.gitignore,README.md'
+          exclude_assets: '.github,node_modules,fetch_links.js,generate_page.js,generate_tags.js,capture_screenshots.js,package.json,package-lock.json,.gitignore,README.md'

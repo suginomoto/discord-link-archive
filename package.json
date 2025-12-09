@@ -11,12 +11,19 @@
     "url": "git+https://github.com/suginomoto/discord-link-archive.git"
   },
   "dependencies": {
-    "discord.js": "^14.25.1"
+    "discord.js": "^14.25.1",
+    "puppeteer": "^22.0.0",
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0-rc.12",
+    "@vitalets/google-translate-api": "^9.2.0"
   },
   "scripts": {
     "fetch": "node fetch_links.js",
+    "metadata": "node fetch_metadata.js",
+    "tags": "node generate_tags.js",
+    "screenshots": "node capture_screenshots.js",
     "generate": "node generate_page.js",
-    "build": "npm run fetch && npm run generate",
+    "build": "npm run fetch && npm run metadata && npm run tags && npm run screenshots && npm run generate",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "license": "ISC",

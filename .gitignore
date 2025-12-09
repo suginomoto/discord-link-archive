@@ -22,3 +22,4 @@ Thumbs.db
 # Generated files (これらはGitHub Actionsで生成されるため除外)
 data/
 index.html
+screenshots/
