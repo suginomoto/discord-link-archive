@@ -8,16 +8,23 @@ Discordスレッドで共有されたリンクを自動収集し、美しいWeb�
 ## 特徴
 
 - **完全自動化**: GitHub Actionsで毎日自動的にリンクを収集・更新
+- **メタデータ自動取得**: リンク先のタイトル・説明文を自動取得して表示
+- **スクリーンショット**: リンク先のプレビュー画像を自動キャプチャ（Puppeteer使用）
+- **タグ自動生成**: コンテンツを分析して自動的にタグ付け
+- **タグフィルター**: タグをクリックして関連リンクを絞り込み表示
+- **グリッドレイアウト**: 1行4つのカード形式で見やすく表示（レスポンシブ対応）
+- **多言語対応**: 説明文を日本語に自動翻訳
 - **モダンなデザイン**: ダークモード対応のプレミアムなUI
-- **レスポンシブ**: モバイル・タブレット・デスクトップに完全対応
-- **詳細情報**: 投稿者、タイムスタンプ、メッセージ抜粋を表示
-- **統計情報**: リンク数、投稿者数などの統計を自動集計
+- **詳細な統計情報**: リンク数、投稿者数、タグ数、ドメイン数を表示
 - **GitHub Pages**: 無料で高速なホスティング
 
 ## 技術スタック
 
 - **Node.js** - サーバーサイドJavaScript実行環境
 - **discord.js** - Discord Bot API
+- **Puppeteer** - スクリーンショット自動キャプチャ
+- **Axios & Cheerio** - メタデータ取得
+- **Google Translate API** - 自動翻訳
 - **GitHub Actions** - CI/CDパイプライン
 - **GitHub Pages** - 静的サイトホスティング
 
@@ -49,6 +56,15 @@ npm install
 # リンクを取得
 npm run fetch
 
+# メタデータを取得
+npm run metadata
+
+# タグを生成
+npm run tags
+
+# スクリーンショットを取得
+npm run screenshots
+
 # HTMLページを生成
 npm run generate
 
@@ -78,35 +94,36 @@ GitHubリポジトリの Settings > Secrets and variables > Actions で以下を
 discord-link-archive/
 ├── .github/
 │   └── workflows/
-│       └── main.yml          # GitHub Actionsワークフロー
+│       └── main.yml              # GitHub Actionsワークフロー
 ├── data/
-│   └── links.json            # 収集されたリンクデータ
-├── icon/
-│   └── *.png                 # アイコン画像
-├── fetch_links.js            # Discordからリンクを取得
-├── generate_page.js          # HTMLページを生成
-├── index.html                # 生成されたWebページ
-└── package.json              # プロジェクト設定
+│   └── links.json                # 収集されたリンクデータ
+├── screenshots/
+│   └── *.jpg                     # スクリーンショット画像
+├── fetch_links.js                # Discordからリンクを取得
+├── fetch_metadata.js             # メタデータを取得
+├── generate_tags.js              # タグを自動生成
+├── capture_screenshots.js        # スクリーンショットを取得
+├── generate_page.js              # HTMLページを生成
+├── index.html                    # 生成されたWebページ
+└── package.json                  # プロジェクト設定
 ```
 
 ## 今後の予定
 
 ### 近日実装予定
 
-- リアルタイム更新: Webhookを使用した即時更新機能(検討中)
+- リアルタイム更新: Webhookを使用した即時更新機能
 - デザイン改良: より洗練されたUIとアニメーション
 - 検索機能: リンクやドメインでの絞り込み検索
-- タグ機能: カテゴリ別のリンク分類
-- 高度な統計: ドメイン別集計、時系列グラフなど
 - データエクスポート: JSON/CSV形式でのエクスポート
-- 多言語対応: 英語・日本語の切り替え
+- 高度な統計: ドメイン別集計、時系列グラフなど
 
 ### 検討中の機能
 
-- リンク先のプレビュー画像表示
 - お気に入り機能
 - 新規リンク通知
 - PWA対応
+- コメント機能
 
 ## コントリビューション
 
@@ -119,6 +136,7 @@ discord-link-archive/
 ## 謝辞
 
 - [discord.js](https://discord.js.org/) - Discord Bot開発フレームワーク
+- [Puppeteer](https://pptr.dev/) - ヘッドレスブラウザ自動化
 - [GitHub Actions](https://github.com/features/actions) - CI/CDプラットフォーム
 - [peaceiris/actions-gh-pages](https://github.com/peaceiris/actions-gh-pages) - GitHub Pagesデプロイアクション
 
