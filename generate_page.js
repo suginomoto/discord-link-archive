@@ -100,24 +100,22 @@ function generateHTML(links) {
         </div>
       </div>
       ${link.tags && link.tags.length > 0 ? `
-      <div class="tags">
-        ${link.tags.map(tag => `<span class="tag" data-tag="${tag}">#${tag}</span>`).join('')}
+      <div class="tags-wrapper">
+        <div class="tags">
+          ${link.tags.map(tag => `<span class="tag" data-tag="${tag}">#${tag}</span>`).join('')}
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
       </div>
       ` : ''}
-      <div class="link-content">
-        <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="link-url" title="${link.url}">
-          ${link.title || link.url}
-        </a>
-        <span class="domain">${extractDomain(link.url)}</span>
+      ${(link.image || link.screenshot) ? `
+      <div class="screenshot-container">
+        <img src="${link.image || link.screenshot}" alt="Screenshot of ${link.url}" class="screenshot" loading="lazy">
       </div>
+      ` : ''}
       ${link.descriptionJa ? `<div class="description">${escapeHtml(link.descriptionJa)}</div>` : ''}
       ${link.content ? `<div class="message-excerpt">${escapeHtml(link.content)}</div>` : ''}
-      ${(link.image || link.screenshot) ? `
-      <details class="screenshot-container">
-        <summary class="screenshot-toggle">スクリーンショットを表示</summary>
-        <img src="${link.image || link.screenshot}" alt="Screenshot of ${link.url}" class="screenshot" loading="lazy">
-      </details>
-      ` : ''}
       ${link.hasAttachments ? `<div class="attachments-badge">📎 ${link.attachmentCount} 個の添付ファイル</div>` : ''}
     </li>
   `).join('');
@@ -133,6 +131,53 @@ function generateHTML(links) {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+    }
+
+    .top-nav {
+      background: var(--bg-primary);
+      border-bottom: 2px solid var(--border-color);
+      padding: 0.75rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .top-nav-content {
+      max-width: 100%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      padding: 0.5rem 1rem;
+      margin-left: 1rem;
+    }
+
+    .nav-link:hover {
+      color: var(--accent-primary);
+    }
+
+    .nav-link.favorite {
+      color: #a1a1aa;
+    }
+
+    .nav-link.favorite:hover {
+      color: #c4c4c7;
+    }
+
+    .nav-link.favorite.active {
+      color: #ffd700;
+    }
+
+    .nav-link.favorite.active:hover {
+      color: #ffed4e;
     }
 
     :root {
@@ -151,7 +196,7 @@ function generateHTML(links) {
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+      background: var(--bg-primary);
       color: var(--text-primary);
       min-height: 100vh;
       padding: 2rem 0;
@@ -166,9 +211,9 @@ function generateHTML(links) {
       text-align: center;
       margin-bottom: 3rem;
       padding: 2rem 1rem;
-      background: var(--bg-card);
+      background: var(--bg-primary);
       border-radius: 0;
-      box-shadow: var(--shadow);
+      box-shadow: none;
       border: none;
       border-bottom: 1px solid var(--border-color);
     }
@@ -310,6 +355,7 @@ function generateHTML(links) {
       display: flex;
       flex-direction: column;
       height: 100%;
+      cursor: pointer;
     }
 
     .link-item.hidden {
@@ -390,11 +436,53 @@ function generateHTML(links) {
       transition: transform 0.2s ease;
     }
 
+    .tags-wrapper {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
     .tags {
       display: flex;
       flex-wrap: wrap;
       gap: 0.375rem;
-      margin-bottom: 0.75rem;
+      flex: 1;
+      max-height: 2rem;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .tags.expanded {
+      max-height: none;
+    }
+
+    .tags-toggle-btn {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      padding: 0.2rem 0.4rem;
+      font-size: 0.7rem;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+      line-height: 1;
+      height: fit-content;
+    }
+
+    .tags-toggle-btn:hover {
+      background: var(--border-color);
+      color: var(--text-primary);
+    }
+
+    .toggle-icon {
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .tags-toggle-btn.expanded .toggle-icon {
+      transform: rotate(180deg);
     }
 
     .tag {
@@ -488,25 +576,9 @@ function generateHTML(links) {
       overflow: hidden;
     }
 
-    .screenshot-toggle {
-      padding: 0.75rem 1rem;
-      background: var(--bg-secondary);
-      cursor: pointer;
-      user-select: none;
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-      transition: all 0.2s ease;
-    }
-
-    .screenshot-toggle:hover {
-      background: var(--border-color);
-      color: var(--text-primary);
-    }
-
     .screenshot {
       width: 100%;
       display: block;
-      border-top: 1px solid var(--border-color);
     }
 
     .attachments-badge {
@@ -567,6 +639,13 @@ function generateHTML(links) {
   </style>
 </head>
 <body>
+  <nav class="top-nav">
+    <div class="top-nav-content">
+      <a href="index.html" class="nav-link">home</a>
+      <a href="tags.html" class="nav-link">tags</a>
+      <a href="#" class="nav-link favorite" id="favorites-link" onclick="toggleFavorites(event)">★ お気に入りのみ</a>
+    </div>
+  </nav>
   <div class="container">
     <header>
       <h1>Discord Link Archive</h1>
@@ -591,17 +670,6 @@ function generateHTML(links) {
       </div>
     </header>
 
-    ${allTags.length > 0 ? `
-    <div class="filter-section">
-      <div class="filter-title">フィルター</div>
-      <div class="filter-tags">
-        <span class="clear-filter" onclick="clearFilter()">すべて表示</span>
-        <span class="filter-tag favorite-filter" onclick="filterFavorites()">★ お気に入りのみ</span>
-        ${allTags.map(tag => `<span class="filter-tag" onclick="filterByTag('${tag}')">#${tag}</span>`).join('')}
-      </div>
-    </div>
-    ` : ''}
-
     <ul class="links-list" id="linksList">
       ${linkItems}
     </ul>
@@ -614,6 +682,21 @@ function generateHTML(links) {
 
   <script>
     let activeFilter = null;
+
+    // お気に入りフィルターをトグル
+    function toggleFavorites(event) {
+      event.preventDefault();
+      const urlParams = new URLSearchParams(window.location.search);
+      const favoritesParam = urlParams.get('favorites');
+      
+      if (favoritesParam === 'true') {
+        // 現在フィルター中の場合は解除してメインページに戻る
+        window.location.href = 'index.html';
+      } else {
+        // フィルターを適用
+        window.location.href = 'index.html?favorites=true';
+      }
+    }
 
     function filterByTag(tag) {
       activeFilter = tag;
@@ -667,6 +750,28 @@ function generateHTML(links) {
 
     // ページ読み込み時にタグクリックイベントを設定
     document.addEventListener('DOMContentLoaded', function() {
+      // お気に入り状態を復元（フィルタリングの前に実行）
+      loadFavorites();
+
+      // URLパラメータからタグとお気に入りフラグを読み取る
+      const urlParams = new URLSearchParams(window.location.search);
+      const tagParam = urlParams.get('tag');
+      const favoritesParam = urlParams.get('favorites');
+      
+      // お気に入りボタンの状態を更新
+      const favoritesLink = document.getElementById('favorites-link');
+      if (favoritesParam === 'true' && favoritesLink) {
+        favoritesLink.classList.add('active');
+      }
+      
+      if (tagParam) {
+        // URLパラメータにタグが指定されている場合、フィルタリングを実行
+        filterByTag(tagParam);
+      } else if (favoritesParam === 'true') {
+        // お気に入りのみを表示
+        filterFavorites();
+      }
+
       // タグクリックイベント
       document.querySelectorAll('.tag').forEach(tagElement => {
         tagElement.onclick = function() {
@@ -675,9 +780,6 @@ function generateHTML(links) {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         };
       });
-
-      // お気に入り状態を復元
-      loadFavorites();
     });
 
     // LocalStorageからお気に入りを読み込む
@@ -726,36 +828,50 @@ function generateHTML(links) {
     function filterFavorites() {
       const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
       const linkItems = document.querySelectorAll('.link-item');
-      const filterTags = document.querySelectorAll('.filter-tag');
-      const favoriteFilter = document.querySelector('.favorite-filter');
 
-      // フィルタータグの選択を解除
-      filterTags.forEach(tag => {
-        if (!tag.classList.contains('favorite-filter')) {
-          tag.classList.remove('active');
+      // お気に入りのみを表示
+      linkItems.forEach(item => {
+        const url = item.dataset.url;
+        if (favorites.includes(url)) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
         }
       });
+    }
 
-      // お気に入りフィルターをアクティブに
-      if (favoriteFilter.classList.contains('active')) {
-        // 既にアクティブな場合は解除
-        favoriteFilter.classList.remove('active');
-        linkItems.forEach(item => {
-          item.classList.remove('hidden');
-        });
-      } else {
-        favoriteFilter.classList.add('active');
-        // お気に入りのみを表示
-        linkItems.forEach(item => {
-          const url = item.dataset.url;
-          if (favorites.includes(url)) {
-            item.classList.remove('hidden');
-          } else {
-            item.classList.add('hidden');
+    // link-item全体をクリック可能にする
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.link-item').forEach(item => {
+        item.addEventListener('click', function(event) {
+          // お気に入りボタン、タグ、タグ展開ボタン、リンクURL自体のクリックは除外
+          if (event.target.closest('.favorite-btn') || 
+              event.target.closest('.tag') || 
+              event.target.closest('.tags-toggle-btn') ||
+              event.target.closest('.link-url')) {
+            return;
+          }
+          
+          // リンクURLを取得して新しいタブで開く
+          const url = this.dataset.url;
+          if (url) {
+            window.open(url, '_blank', 'noopener,noreferrer');
           }
         });
-      }
-    }
+      });
+
+      // タグの展開/折りたたみ機能
+      document.querySelectorAll('.tags-toggle-btn').forEach(btn => {
+        btn.addEventListener('click', function(event) {
+          event.stopPropagation(); // link-itemのクリックイベントを防ぐ
+          const tagsWrapper = this.closest('.tags-wrapper');
+          const tags = tagsWrapper.querySelector('.tags');
+          
+          tags.classList.toggle('expanded');
+          this.classList.toggle('expanded');
+        });
+      });
+    });
   </script>
 </body>
 </html>`;
