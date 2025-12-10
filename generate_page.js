@@ -86,13 +86,18 @@ function generateHTML(links) {
   const allTags = getAllTags(links);
 
   const linkItems = links.map((link, index) => `
-    <li class="link-item" data-tags="${(link.tags || []).join(',')}">
+    <li class="link-item" data-tags="${(link.tags || []).join(',')}" data-url="${link.url}">
       <div class="link-header">
         <div class="author-info">
           <img src="${link.author.avatar}" alt="${link.author.displayName}" class="avatar">
           <span class="author-name">${link.author.displayName}</span>
         </div>
-        <span class="timestamp">${formatDate(link.timestamp)}</span>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="${link.url}" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">${formatDate(link.timestamp)}</span>
+        </div>
       </div>
       ${link.tags && link.tags.length > 0 ? `
       <div class="tags">
@@ -254,6 +259,23 @@ function generateHTML(links) {
       border-color: var(--accent-primary);
     }
 
+    .favorite-filter {
+      background: rgba(255, 215, 0, 0.15);
+      border-color: rgba(255, 215, 0, 0.3);
+      color: #ffd700;
+    }
+
+    .favorite-filter:hover {
+      background: rgba(255, 215, 0, 0.25);
+      border-color: #ffd700;
+    }
+
+    .favorite-filter.active {
+      background: #ffd700;
+      color: var(--bg-primary);
+      border-color: #ffd700;
+    }
+
     .clear-filter {
       padding: 0.5rem 1rem;
       background: var(--bg-secondary);
@@ -302,9 +324,16 @@ function generateHTML(links) {
 
     .link-header {
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
       gap: 0.5rem;
       margin-bottom: 0.75rem;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     .author-info {
@@ -329,6 +358,36 @@ function generateHTML(links) {
     .timestamp {
       font-size: 0.75rem;
       color: var(--text-secondary);
+      white-space: nowrap;
+    }
+
+    .favorite-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.25rem;
+      font-size: 1.2rem;
+      line-height: 1;
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+    }
+
+    .favorite-btn:hover {
+      color: var(--accent-primary);
+      transform: scale(1.1);
+    }
+
+    .favorite-btn.active {
+      color: #ffd700;
+    }
+
+    .favorite-btn.active .star-icon {
+      content: '★';
+    }
+
+    .star-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
     }
 
     .tags {
@@ -534,9 +593,10 @@ function generateHTML(links) {
 
     ${allTags.length > 0 ? `
     <div class="filter-section">
-      <div class="filter-title">タグでフィルター</div>
+      <div class="filter-title">フィルター</div>
       <div class="filter-tags">
         <span class="clear-filter" onclick="clearFilter()">すべて表示</span>
+        <span class="filter-tag favorite-filter" onclick="filterFavorites()">★ お気に入りのみ</span>
         ${allTags.map(tag => `<span class="filter-tag" onclick="filterByTag('${tag}')">#${tag}</span>`).join('')}
       </div>
     </div>
@@ -607,6 +667,7 @@ function generateHTML(links) {
 
     // ページ読み込み時にタグクリックイベントを設定
     document.addEventListener('DOMContentLoaded', function() {
+      // タグクリックイベント
       document.querySelectorAll('.tag').forEach(tagElement => {
         tagElement.onclick = function() {
           const clickedTag = this.dataset.tag;
@@ -614,7 +675,87 @@ function generateHTML(links) {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         };
       });
+
+      // お気に入り状態を復元
+      loadFavorites();
     });
+
+    // LocalStorageからお気に入りを読み込む
+    function loadFavorites() {
+      const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+      const buttons = document.querySelectorAll('.favorite-btn');
+      buttons.forEach(btn => {
+        if (favorites.includes(btn.dataset.url)) {
+          btn.classList.add('active');
+          btn.querySelector('.star-icon').textContent = '★';
+        }
+      });
+    }
+
+    // お気に入りを切り替える
+    function toggleFavorite(url, button) {
+      const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+      const index = favorites.indexOf(url);
+
+      if (index > -1) {
+        // お気に入りから削除
+        favorites.splice(index, 1);
+        button.classList.remove('active');
+        button.querySelector('.star-icon').textContent = '☆';
+      } else {
+        // お気に入りに追加
+        favorites.push(url);
+        button.classList.add('active');
+        button.querySelector('.star-icon').textContent = '★';
+      }
+
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+    }
+
+    // お気に入りボタンにイベントを設定
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.favorite-btn').forEach(btn => {
+        btn.onclick = function() {
+          const url = this.dataset.url;
+          toggleFavorite(url, this);
+        };
+      });
+    });
+
+    // お気に入りでフィルタリング
+    function filterFavorites() {
+      const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+      const linkItems = document.querySelectorAll('.link-item');
+      const filterTags = document.querySelectorAll('.filter-tag');
+      const favoriteFilter = document.querySelector('.favorite-filter');
+
+      // フィルタータグの選択を解除
+      filterTags.forEach(tag => {
+        if (!tag.classList.contains('favorite-filter')) {
+          tag.classList.remove('active');
+        }
+      });
+
+      // お気に入りフィルターをアクティブに
+      if (favoriteFilter.classList.contains('active')) {
+        // 既にアクティブな場合は解除
+        favoriteFilter.classList.remove('active');
+        linkItems.forEach(item => {
+          item.classList.remove('hidden');
+        });
+      } else {
+        favoriteFilter.classList.add('active');
+        // お気に入りのみを表示
+        linkItems.forEach(item => {
+          const url = item.dataset.url;
+          if (favorites.includes(url)) {
+            item.classList.remove('hidden');
+          } else {
+            item.classList.add('hidden');
+          }
+        });
+      }
+    }
   </script>
 </body>
 </html>`;

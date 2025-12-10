@@ -140,9 +140,35 @@ async function main() {
       console.log('dataディレクトリを作成しました');
     }
 
-    // JSONファイルに保存
+    // 既存のlinks.jsonを読み込み（存在する場合）
     const outputPath = path.join(dataDir, 'links.json');
-    fs.writeFileSync(outputPath, JSON.stringify(links, null, 2), 'utf-8');
+    let existingLinks = [];
+    if (fs.existsSync(outputPath)) {
+      try {
+        const existingData = fs.readFileSync(outputPath, 'utf-8');
+        existingLinks = JSON.parse(existingData);
+        console.log(`既存のリンクデータを読み込みました: ${existingLinks.length} 件`);
+      } catch (error) {
+        console.warn('既存のlinks.jsonの読み込みに失敗しました。新規作成します。');
+      }
+    }
+
+    // 既存のお気に入り状態をマップに保存
+    const favoriteMap = new Map();
+    existingLinks.forEach(link => {
+      if (link.isFavorite) {
+        favoriteMap.set(link.url, true);
+      }
+    });
+
+    // 新しいリンクにisFavoriteフラグを追加（既存の状態を保持）
+    const enrichedLinks = links.map(link => ({
+      ...link,
+      isFavorite: favoriteMap.has(link.url) ? true : false
+    }));
+
+    // JSONファイルに保存
+    fs.writeFileSync(outputPath, JSON.stringify(enrichedLinks, null, 2), 'utf-8');
 
     console.log(`リンク情報を ${outputPath} に保存しました`);
     console.log('処理が完了しました！');

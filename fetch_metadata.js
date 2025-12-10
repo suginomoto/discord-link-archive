@@ -380,7 +380,8 @@ async function main() {
                 description: metadata.description, // 元の説明文
                 descriptionJa: descriptionJa,      // 日本語の説明文
                 metaTags: metaTags,
-                image: metadata.image || ''       // 画像URL
+                image: metadata.image || '',       // 画像URL
+                isFavorite: link.isFavorite || false // お気に入り状態を保持
             });
 
             // レート制限を避けるため、少し待機
