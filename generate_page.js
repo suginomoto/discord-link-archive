@@ -616,11 +616,34 @@ function generateHTML(links) {
 
     @media (max-width: 640px) {
       body {
-        padding: 1rem 0;
+        padding: 0.5rem 0;
+      }
+
+      header {
+        margin-bottom: 1.5rem;
+        padding: 1rem 0.5rem;
       }
 
       h1 {
-        font-size: 2rem;
+        font-size: 1.5rem;
+        margin-bottom: 0.25rem;
+      }
+
+      .subtitle {
+        font-size: 0.875rem;
+      }
+
+      .stats {
+        gap: 0.75rem;
+        margin-top: 1rem;
+      }
+
+      .stat-number {
+        font-size: 1.5rem;
+      }
+
+      .stat-label {
+        font-size: 0.75rem;
       }
 
       .links-list {
@@ -631,10 +654,6 @@ function generateHTML(links) {
 
       .link-item {
         padding: 0.75rem;
-      }
-
-      .stats {
-        gap: 1rem;
       }
     }
   </style>
