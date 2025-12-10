@@ -133,10 +133,15 @@ function generateHTML(links) {
       box-sizing: border-box;
     }
 
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
+    }
+
     .top-nav {
       background: var(--bg-primary);
       border-bottom: 2px solid var(--border-color);
-      padding: 0.75rem 2rem;
+      padding: 0.75rem 1rem;
       position: sticky;
       top: 0;
       z-index: 1000;
@@ -205,6 +210,7 @@ function generateHTML(links) {
     .container {
       max-width: 100%;
       margin: 0;
+      overflow-x: hidden;
     }
 
     header {
@@ -616,7 +622,15 @@ function generateHTML(links) {
 
     @media (max-width: 640px) {
       body {
-        padding: 0.5rem 0;
+        padding: 0;
+      }
+
+      .top-nav {
+        padding: 0.75rem 0.5rem;
+      }
+
+      .container {
+        padding: 0;
       }
 
       header {
@@ -649,11 +663,11 @@ function generateHTML(links) {
       .links-list {
         grid-template-columns: repeat(2, 1fr);
         padding: 0 0.5rem;
-        gap: 0.75rem;
+        gap: 0.5rem;
       }
 
       .link-item {
-        padding: 0.75rem;
+        padding: 0.5rem;
       }
     }
   </style>
