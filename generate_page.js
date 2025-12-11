@@ -114,7 +114,12 @@ function generateHTML(links) {
         <img src="${link.image || link.screenshot}" alt="Screenshot of ${link.url}" class="screenshot" loading="lazy">
       </div>
       ` : ''}
-      ${link.descriptionJa ? `<div class="description">${escapeHtml(link.descriptionJa)}</div>` : ''}
+      ${link.descriptionJa ? `
+      <div class="description-wrapper">
+        <div class="description">${escapeHtml(link.descriptionJa)}</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      ` : ''}
       ${link.content ? `<div class="message-excerpt">${escapeHtml(link.content)}</div>` : ''}
       ${link.hasAttachments ? `<div class="attachments-badge">📎 ${link.attachmentCount} 個の添付ファイル</div>` : ''}
     </li>
@@ -548,16 +553,46 @@ function generateHTML(links) {
     }
 
 
+    .description-wrapper {
+      position: relative;
+      margin-top: 0.5rem;
+    }
+
     .description {
       color: var(--text-secondary);
       font-size: 0.75rem;
       line-height: 1.4;
-      margin-top: 0.5rem;
       font-style: italic;
       display: -webkit-box;
-      -webkit-line-clamp: 3;
+      -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
+    }
+
+    .description.expanded {
+      -webkit-line-clamp: unset;
+      display: block;
+    }
+
+    .description-toggle-btn {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      color: var(--accent-primary);
+      cursor: pointer;
+      padding: 0.15rem 0.4rem;
+      font-size: 0.7rem;
+      margin-top: 0.25rem;
+      transition: all 0.2s ease;
+    }
+
+    .description-toggle-btn:hover {
+      background: var(--border-color);
+      color: var(--text-primary);
+    }
+
+    .description-toggle-btn.expanded {
+      display: none;
     }
 
     .message-excerpt {
@@ -661,14 +696,29 @@ function generateHTML(links) {
       }
 
       .links-list {
-        grid-template-columns: repeat(2, 1fr);
-        padding: 0 0.5rem;
-        gap: 0.5rem;
+        grid-template-columns: repeat(3, 1fr);
+        padding: 0 0.25rem;
+        gap: 0.3rem;
       }
 
       .link-item {
-        padding: 0.2rem;
+        padding: 0.4rem;
         border-radius: 6px;
+      }
+
+      .link-url {
+        font-size: 0.75rem;
+        line-height: 1.3;
+        -webkit-line-clamp: 2;
+      }
+
+      .link-content {
+        gap: 0.25rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .screenshot-container {
+        margin-top: 0.5rem;
       }
     }
 
@@ -699,22 +749,35 @@ function generateHTML(links) {
         font-size: 0.65rem;
       }
 
-      /* リンクリストを2カラムに維持 */
+      /* リンクリストを2カラムに（横幅を短く） */
       .links-list {
         grid-template-columns: repeat(2, 1fr);
-        gap: 0.5rem;
+        gap: 0.25rem;
+        max-width: 320px;
+        margin: 0 auto;
+        padding: 0 0.5rem;
       }
 
       /* link-itemのサイズ調整 */
       .link-item {
-        padding: 0.2rem;
+        padding: 0.35rem;
         border-radius: 6px;
+        max-width: 150px;
       }
 
       /* link-item内の要素のサイズ調整 */
+      /* ヘッダーを縦並びに変更（名前→日付→タグの順） */
       .link-header {
+        flex-direction: column;
+        align-items: flex-start;
         margin-bottom: 0.2rem;
-        gap: 0.2rem;
+        gap: 0.15rem;
+      }
+
+      .header-right {
+        order: 1;
+        width: 100%;
+        justify-content: space-between;
       }
 
       .author-info {
@@ -748,6 +811,17 @@ function generateHTML(links) {
         padding: 0.08rem 0.25rem;
       }
 
+      .link-url {
+        font-size: 0.65rem;
+        line-height: 1.25;
+        -webkit-line-clamp: 2;
+      }
+
+      .link-content {
+        gap: 0.15rem;
+        margin-bottom: 0.3rem;
+      }
+
       .description,
       .message-excerpt {
         font-size: 0.55rem;
@@ -760,9 +834,18 @@ function generateHTML(links) {
         margin-top: 0.3rem;
       }
 
+      /* 星をカードの右上に配置 */
+      .link-item {
+        position: relative;
+      }
+
       .favorite-btn {
+        position: absolute;
+        top: 0.2rem;
+        right: 0.2rem;
         font-size: 0.9rem;
         padding: 0.1rem;
+        z-index: 10;
       }
     }
   </style>
@@ -907,6 +990,24 @@ function generateHTML(links) {
           const clickedTag = this.dataset.tag;
           filterByTag(clickedTag);
           window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+      });
+
+
+      // 説明文の展開ボタン（2行以内の場合は非表示）
+      document.querySelectorAll('.description-wrapper').forEach(wrapper => {
+        const description = wrapper.querySelector('.description');
+        const btn = wrapper.querySelector('.description-toggle-btn');
+        
+        // テキストが切り詰められていない場合はボタンを非表示
+        if (description.scrollHeight <= description.clientHeight) {
+          btn.style.display = 'none';
+        }
+        
+        btn.onclick = function(e) {
+          e.stopPropagation();
+          description.classList.toggle('expanded');
+          this.classList.toggle('expanded');
         };
       });
     });
