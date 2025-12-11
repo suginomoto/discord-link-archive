@@ -667,7 +667,102 @@ function generateHTML(links) {
       }
 
       .link-item {
-        padding: 0.5rem;
+        padding: 0.2rem;
+        border-radius: 6px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      /* ヘッダーの調整 */
+      h1 {
+        font-size: 1.25rem;
+        word-wrap: break-word;
+      }
+
+      .subtitle {
+        font-size: 0.8rem;
+      }
+
+      /* ナビゲーションの調整 */
+      .nav-link {
+        font-size: 0.8rem;
+        padding: 0.35rem 0.5rem;
+        margin-left: 0.25rem;
+      }
+
+      /* 統計情報の調整 */
+      .stat-number {
+        font-size: 1.25rem;
+      }
+
+      .stat-label {
+        font-size: 0.65rem;
+      }
+
+      /* リンクリストを2カラムに維持 */
+      .links-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+      }
+
+      /* link-itemのサイズ調整 */
+      .link-item {
+        padding: 0.2rem;
+        border-radius: 6px;
+      }
+
+      /* link-item内の要素のサイズ調整 */
+      .link-header {
+        margin-bottom: 0.2rem;
+        gap: 0.2rem;
+      }
+
+      .author-info {
+        gap: 0.3rem;
+      }
+
+      .author-name {
+        font-size: 0.65rem;
+      }
+
+      .avatar {
+        width: 16px;
+        height: 16px;
+      }
+
+      .timestamp {
+        font-size: 0.55rem;
+      }
+
+      .tags-wrapper {
+        margin-bottom: 0.3rem;
+      }
+
+      .tag {
+        font-size: 0.55rem;
+        padding: 0.08rem 0.2rem;
+      }
+
+      .domain {
+        font-size: 0.55rem;
+        padding: 0.08rem 0.25rem;
+      }
+
+      .description,
+      .message-excerpt {
+        font-size: 0.55rem;
+        line-height: 1.3;
+        margin-top: 0.2rem;
+        padding: 0.25rem;
+      }
+
+      .screenshot-container {
+        margin-top: 0.3rem;
+      }
+
+      .favorite-btn {
+        font-size: 0.9rem;
+        padding: 0.1rem;
       }
     }
   </style>
