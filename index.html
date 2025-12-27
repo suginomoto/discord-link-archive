@@ -1,0 +1,3332 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discord Link Archive</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    .top-nav {
+      background: var(--bg-primary);
+      border-bottom: 2px solid var(--border-color);
+      padding: 0.75rem 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .top-nav-content {
+      max-width: 100%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      padding: 0.5rem 1rem;
+      margin-left: 1rem;
+    }
+
+    .nav-link:hover {
+      color: var(--accent-primary);
+    }
+
+    .nav-link.favorite {
+      color: #a1a1aa;
+    }
+
+    .nav-link.favorite:hover {
+      color: #c4c4c7;
+    }
+
+    .nav-link.favorite.active {
+      color: #ffd700;
+    }
+
+    .nav-link.favorite.active:hover {
+      color: #ffed4e;
+    }
+
+    :root {
+      --bg-primary: #0f0f23;
+      --bg-secondary: #1a1a2e;
+      --bg-card: #16213e;
+      --accent-primary: #4a9eff;
+      --accent-secondary: #7b68ee;
+      --text-primary: #e4e4e7;
+      --text-secondary: #a1a1aa;
+      --border-color: #27272a;
+      --tag-bg: rgba(74, 158, 255, 0.15);
+      --tag-border: rgba(74, 158, 255, 0.3);
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 2rem 0;
+    }
+
+    .container {
+      max-width: 100%;
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding: 2rem 1rem;
+      background: var(--bg-primary);
+      border-radius: 0;
+      box-shadow: none;
+      border: none;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-top: 0.25rem;
+    }
+
+    .filter-section {
+      margin-bottom: 2rem;
+      padding: 1.5rem 1rem;
+      background: var(--bg-card);
+      border-radius: 0;
+      border: none;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .filter-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .filter-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .filter-tag {
+      padding: 0.5rem 1rem;
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-border);
+      border-radius: 6px;
+      color: var(--accent-primary);
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .filter-tag:hover {
+      background: rgba(74, 158, 255, 0.25);
+      border-color: var(--accent-primary);
+    }
+
+    .filter-tag.active {
+      background: var(--accent-primary);
+      color: var(--bg-primary);
+      border-color: var(--accent-primary);
+    }
+
+    .favorite-filter {
+      background: rgba(255, 215, 0, 0.15);
+      border-color: rgba(255, 215, 0, 0.3);
+      color: #ffd700;
+    }
+
+    .favorite-filter:hover {
+      background: rgba(255, 215, 0, 0.25);
+      border-color: #ffd700;
+    }
+
+    .favorite-filter.active {
+      background: #ffd700;
+      color: var(--bg-primary);
+      border-color: #ffd700;
+    }
+
+    .clear-filter {
+      padding: 0.5rem 1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .clear-filter:hover {
+      background: var(--border-color);
+      color: var(--text-primary);
+    }
+
+    .links-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      padding: 0 1rem;
+    }
+
+    .link-item {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .link-item.hidden {
+      display: none;
+    }
+
+    .link-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 12px -2px rgba(0, 0, 0, 0.4), 0 4px 8px -2px rgba(0, 0, 0, 0.3);
+      border-color: var(--accent-primary);
+    }
+
+    .link-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid var(--accent-primary);
+    }
+
+    .author-name {
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: 0.875rem;
+    }
+
+    .timestamp {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      white-space: nowrap;
+    }
+
+    .favorite-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.25rem;
+      font-size: 1.2rem;
+      line-height: 1;
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+    }
+
+    .favorite-btn:hover {
+      color: var(--accent-primary);
+      transform: scale(1.1);
+    }
+
+    .favorite-btn.active {
+      color: #ffd700;
+    }
+
+    .favorite-btn.active .star-icon {
+      content: '★';
+    }
+
+    .star-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+    }
+
+    .tags-wrapper {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.375rem;
+      flex: 1;
+      max-height: 2rem;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .tags.expanded {
+      max-height: none;
+    }
+
+    .tags-toggle-btn {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      padding: 0.2rem 0.4rem;
+      font-size: 0.7rem;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+      line-height: 1;
+      height: fit-content;
+    }
+
+    .tags-toggle-btn:hover {
+      background: var(--border-color);
+      color: var(--text-primary);
+    }
+
+    .toggle-icon {
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .tags-toggle-btn.expanded .toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .tag {
+      padding: 0.2rem 0.5rem;
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-border);
+      border-radius: 4px;
+      color: var(--accent-primary);
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tag:hover {
+      background: rgba(74, 158, 255, 0.25);
+      border-color: var(--accent-primary);
+    }
+
+    .link-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+      flex: 1;
+    }
+
+    .link-url {
+      color: var(--accent-primary);
+      text-decoration: none;
+      font-weight: 500;
+      word-break: break-word;
+      transition: color 0.2s ease;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .link-url:hover {
+      color: var(--accent-secondary);
+      text-decoration: underline;
+    }
+
+    .domain {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      background: var(--bg-secondary);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      width: fit-content;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+
+
+    .description-wrapper {
+      position: relative;
+      margin-top: 0.5rem;
+    }
+
+    .description {
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      line-height: 1.4;
+      font-style: italic;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .description.expanded {
+      -webkit-line-clamp: unset;
+      display: block;
+    }
+
+    .description-toggle-btn {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      color: var(--accent-primary);
+      cursor: pointer;
+      padding: 0.15rem 0.4rem;
+      font-size: 0.7rem;
+      margin-top: 0.25rem;
+      transition: all 0.2s ease;
+    }
+
+    .description-toggle-btn:hover {
+      background: var(--border-color);
+      color: var(--text-primary);
+    }
+
+    .description-toggle-btn.expanded {
+      display: none;
+    }
+
+    .message-excerpt {
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      line-height: 1.4;
+      padding: 0.5rem;
+      background: var(--bg-secondary);
+      border-radius: 6px;
+      border-left: 2px solid var(--accent-primary);
+      margin-top: 0.5rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .screenshot-container {
+      margin-top: 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .screenshot {
+      width: 100%;
+      display: block;
+    }
+
+    .attachments-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--accent-secondary);
+      background: rgba(123, 104, 238, 0.1);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      width: fit-content;
+      margin-top: 0.5rem;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 2rem 1rem;
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
+
+    @media (max-width: 1400px) {
+      .links-list {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .links-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 0;
+      }
+
+      .top-nav {
+        padding: 0.75rem 0.5rem;
+      }
+
+      .container {
+        padding: 0;
+      }
+
+      header {
+        margin-bottom: 1.5rem;
+        padding: 1rem 0.5rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+        margin-bottom: 0.25rem;
+      }
+
+      .subtitle {
+        font-size: 0.875rem;
+      }
+
+      .stats {
+        gap: 0.75rem;
+        margin-top: 1rem;
+      }
+
+      .stat-number {
+        font-size: 1.5rem;
+      }
+
+      .stat-label {
+        font-size: 0.75rem;
+      }
+
+      .links-list {
+        grid-template-columns: repeat(3, 1fr);
+        padding: 0 0.25rem;
+        gap: 0.3rem;
+      }
+
+      .link-item {
+        padding: 0.4rem;
+        border-radius: 6px;
+      }
+
+      .link-url {
+        font-size: 0.75rem;
+        line-height: 1.3;
+        -webkit-line-clamp: 2;
+      }
+
+      .link-content {
+        gap: 0.25rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .screenshot-container {
+        margin-top: 0.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      /* ヘッダーの調整 */
+      h1 {
+        font-size: 1.25rem;
+        word-wrap: break-word;
+      }
+
+      .subtitle {
+        font-size: 0.8rem;
+      }
+
+      /* ナビゲーションの調整 */
+      .nav-link {
+        font-size: 0.8rem;
+        padding: 0.35rem 0.5rem;
+        margin-left: 0.25rem;
+      }
+
+      /* 統計情報の調整 */
+      .stat-number {
+        font-size: 1.25rem;
+      }
+
+      .stat-label {
+        font-size: 0.65rem;
+      }
+
+      /* リンクリストを2カラムに（横幅を短く） */
+      .links-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.25rem;
+        max-width: 320px;
+        margin: 0 auto;
+        padding: 0 0.5rem;
+      }
+
+      /* link-itemのサイズ調整 */
+      .link-item {
+        padding: 0.35rem;
+        border-radius: 6px;
+        max-width: 150px;
+      }
+
+      /* link-item内の要素のサイズ調整 */
+      /* ヘッダーを縦並びに変更（名前→日付→タグの順） */
+      .link-header {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 0.2rem;
+        gap: 0.15rem;
+      }
+
+      .header-right {
+        order: 1;
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .author-info {
+        gap: 0.3rem;
+      }
+
+      .author-name {
+        font-size: 0.65rem;
+      }
+
+      .avatar {
+        width: 16px;
+        height: 16px;
+      }
+
+      .timestamp {
+        font-size: 0.55rem;
+      }
+
+      .tags-wrapper {
+        margin-bottom: 0.3rem;
+      }
+
+      .tag {
+        font-size: 0.55rem;
+        padding: 0.08rem 0.2rem;
+      }
+
+      .domain {
+        font-size: 0.55rem;
+        padding: 0.08rem 0.25rem;
+      }
+
+      .link-url {
+        font-size: 0.65rem;
+        line-height: 1.25;
+        -webkit-line-clamp: 2;
+      }
+
+      .link-content {
+        gap: 0.15rem;
+        margin-bottom: 0.3rem;
+      }
+
+      .description,
+      .message-excerpt {
+        font-size: 0.55rem;
+        line-height: 1.3;
+        margin-top: 0.2rem;
+        padding: 0.25rem;
+      }
+
+      .screenshot-container {
+        margin-top: 0.3rem;
+      }
+
+      /* 星をカードの右上に配置 */
+      .link-item {
+        position: relative;
+      }
+
+      .favorite-btn {
+        position: absolute;
+        top: 0.2rem;
+        right: 0.2rem;
+        font-size: 0.9rem;
+        padding: 0.1rem;
+        z-index: 10;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="top-nav">
+    <div class="top-nav-content">
+      <a href="index.html" class="nav-link">home</a>
+      <a href="tags.html" class="nav-link">tags</a>
+      <a href="#" class="nav-link favorite" id="favorites-link" onclick="toggleFavorites(event)">★ お気に入りのみ</a>
+    </div>
+  </nav>
+  <div class="container">
+    <header>
+      <h1>Discord Link Archive</h1>
+      <p class="subtitle">スレッドで共有されたリンク集</p>
+      <div class="stats">
+        <div class="stat-item">
+          <div class="stat-number">66</div>
+          <div class="stat-label">リンク数</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">3</div>
+          <div class="stat-label">投稿者数</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">52</div>
+          <div class="stat-label">タグ数</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">35</div>
+          <div class="stat-label">ドメイン数</div>
+        </div>
+      </div>
+    </header>
+
+    <ul class="links-list" id="linksList">
+      
+    <li class="link-item" data-tags="AI,GitHub,デザイン" data-url="https://github.com/infiniV/VoiceFlow">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/infiniV/VoiceFlow" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/12/26 11:53</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="AI">#AI</span><span class="tag" data-tag="GitHub">#GitHub</span><span class="tag" data-tag="デザイン">#デザイン</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://opengraph.githubassets.com/e36c031f27c432e7f4d80ee5b4dc604cdf3b435379b49c94c9e9bd4e0e8a7949/infiniV/VoiceFlow" alt="Screenshot of https://github.com/infiniV/VoiceFlow" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">VoiceFlow は、OpenAI の Whisper のパワーを Windows マシンに直接もたらします。完全にハードウェア上で実行され、音声データがデバイスから流出することはありません。プライバシー、スピードを考慮した設計</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/infiniV/VoiceFlow</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="AI,GitHub,UI,ガイド" data-url="https://github.com/bullmeza/screen.vision">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/bullmeza/screen.vision" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/12/26 11:53</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="AI">#AI</span><span class="tag" data-tag="GitHub">#GitHub</span><span class="tag" data-tag="UI">#UI</span><span class="tag" data-tag="ガイド">#ガイド</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://opengraph.githubassets.com/02e6d61643e9d7edb3f147cacbf06b92eeb451e87991ca3734f3abf01bf1ae17/bullmeza/screen.vision" alt="Screenshot of https://github.com/bullmeza/screen.vision" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">AI と画面を共有します。 AI ガイドによるステップバイステップで問題を解決します。 - ブルメザ/screen.vision</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/bullmeza/screen.vision</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="AI,GitHub" data-url="https://github.com/chidiwilliams/buzz">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/chidiwilliams/buzz" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/12/15 19:32</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="AI">#AI</span><span class="tag" data-tag="GitHub">#GitHub</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://opengraph.githubassets.com/702240a21f701115b8257631233cb36695683e7c0c0f1eba91ec2bb8025ee357/chidiwilliams/buzz" alt="Screenshot of https://github.com/chidiwilliams/buzz" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">Buzz は、パーソナル コンピュータ上で音声をオフラインで文字起こしおよび翻訳します。 OpenAI の Whisper を利用しています。 - シディウィリアムズ/バズ</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/chidiwilliams/buzz</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="AI,GitHub" data-url="https://github.com/spipm/Depixelization_poc?utm_source=opensourceprojects.dev&ref=opensourceprojects.dev">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/spipm/Depixelization_poc?utm_source=opensourceprojects.dev&ref=opensourceprojects.dev" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/12/12 09:43</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="AI">#AI</span><span class="tag" data-tag="GitHub">#GitHub</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://opengraph.githubassets.com/3f44730533a0a031d78d005151053e0d353526ca1b3c071e5bdc182021d15907/spipm/Depixelization_poc" alt="Screenshot of https://github.com/spipm/Depixelization_poc?utm_source=opensourceprojects.dev&ref=opensourceprojects.dev" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">Depix は、ピクセル化されたスクリーンショットから平文を復元する技術の PoC です。 - GitHub - spipm/Depixelization_poc (opensourceprojects.dev)</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/spipm/Depixelization_poc?utm_source=opensourceprojects.dev&amp;ref=opensourceprojects.dev</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="React,ドキュメント,フレームワーク" data-url="https://fumadocs.dev/">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://fumadocs.dev/" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/12/11 04:30</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="React">#React</span><span class="tag" data-tag="ドキュメント">#ドキュメント</span><span class="tag" data-tag="フレームワーク">#フレームワーク</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://www.fumadocs.dev/banner.png" alt="Screenshot of https://fumadocs.dev/" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">React.js ドキュメント フレームワーク。</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://fumadocs.dev/</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="Localpdf sanctuary,Private pdf tools,Secure pdf editor,ツール,デザイン" data-url="https://localpdf.online">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://localpdf.online" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/12/11 03:58</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="Localpdf sanctuary">#Localpdf sanctuary</span><span class="tag" data-tag="Private pdf tools">#Private pdf tools</span><span class="tag" data-tag="Secure pdf editor">#Secure pdf editor</span><span class="tag" data-tag="ツール">#ツール</span><span class="tag" data-tag="デザイン">#デザイン</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://localpdf.online/logos/localpdf-social-1200x630.png" alt="Screenshot of https://localpdf.online" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">無料のプレミアム PDF ツールボックス。ブラウザ内で PDF を直接結合、分割、圧縮、編集できます。 100% クライアント側の処理、ファイルのアップロードなし、プライバシー優先の設計。</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://localpdf.online</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="AI" data-url="https://www.granola.ai">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/1083600474999107634/a_8aaf0459f90203194efb3b6b65031fde.gif" alt="Suginomoto" class="avatar">
+          <span class="author-name">Suginomoto</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://www.granola.ai" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/12/10 01:04</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="AI">#AI</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://www.granola.ai/opengraph-image.png?9f0ee69b11547e2f" alt="Screenshot of https://www.granola.ai" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">Granola は、生の会議メモを取り込んで素晴らしいものにします。厄介な会議ボットは必要ありません。毎回、あなたとあなたのチームに美しいメモを残すだけです。</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://www.granola.ai</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="AI" data-url="https://willowvoice.com/">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/1083600474999107634/a_8aaf0459f90203194efb3b6b65031fde.gif" alt="Suginomoto" class="avatar">
+          <span class="author-name">Suginomoto</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://willowvoice.com/" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/12/10 01:00</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="AI">#AI</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://framerusercontent.com/images/0Wi8vOYi5Jeucrcdkv5hQVc.png" alt="Screenshot of https://willowvoice.com/" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">電子メール、文書、カーソル、メモ取り、メッセージングのための高速かつ正確な音声ディクテーション。音声をシームレスにテキストに変換し、自動的に編集し、プライバシーを確​​保して安全を確保します。コンテキスト認識 AI とカスタム辞書で生産性を向上します。ウィローボイスを手に入れよう！</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://willowvoice.com/</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="GitHub,UI" data-url="https://github.com/IviriusCommunity/Rebound/">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/IviriusCommunity/Rebound/" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/12/08 06:51</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="GitHub">#GitHub</span><span class="tag" data-tag="UI">#UI</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://opengraph.githubassets.com/edf799764254715da34e806841159cc7fa615526c6992238373f8d541fc45253/IviriusCommunity/Rebound" alt="Screenshot of https://github.com/IviriusCommunity/Rebound/" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">Windows 11 システムアプリの WinUI 書き換えプロジェクト。 GitHub でアカウントを作成して、IviriusCommunity/Rebound の開発に貢献してください。</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/IviriusCommunity/Rebound/</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="GitHub,iOS" data-url="https://github.com/Ebullioscopic/Atoll">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/Ebullioscopic/Atoll" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/12/05 21:14</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="GitHub">#GitHub</span><span class="tag" data-tag="iOS">#iOS</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://repository-images.githubusercontent.com/881723326/e97e8899-74d7-4072-bab5-4d89834574f4" alt="Screenshot of https://github.com/Ebullioscopic/Atoll" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">macOS 用のダイナミック アイランド。 GitHub でアカウントを作成して、Ebullioscope/Atoll の開発に貢献してください。</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/Ebullioscopic/Atoll</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="GitHub,UX" data-url="https://github.com/TibixDev/winboat">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/TibixDev/winboat" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/12/05 08:37</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="GitHub">#GitHub</span><span class="tag" data-tag="UX">#UX</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://repository-images.githubusercontent.com/960420129/699936fe-eb73-47d1-aa22-e6fd0837066b" alt="Screenshot of https://github.com/TibixDev/winboat" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">✨ シームレスな統合により、🐧 Linux 上で Windows アプリを実行 - TibixDev/winboat</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/TibixDev/winboat</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags=".env,Developer secrets,Dotenv,Dotenv-vault,Dotenvx,Encrypt,Environments,Secret manager,Secretops,Share,Twitter,Vault" data-url="https://dotenvx.com">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://dotenvx.com" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/12/04 04:30</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag=".env">#.env</span><span class="tag" data-tag="Developer secrets">#Developer secrets</span><span class="tag" data-tag="Dotenv">#Dotenv</span><span class="tag" data-tag="Dotenv-vault">#Dotenv-vault</span><span class="tag" data-tag="Dotenvx">#Dotenvx</span><span class="tag" data-tag="Encrypt">#Encrypt</span><span class="tag" data-tag="Environments">#Environments</span><span class="tag" data-tag="Secret manager">#Secret manager</span><span class="tag" data-tag="Secretops">#Secretops</span><span class="tag" data-tag="Share">#Share</span><span class="tag" data-tag="Twitter">#Twitter</span><span class="tag" data-tag="Vault">#Vault</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://dotenvx.com/og-image.png" alt="Screenshot of https://dotenvx.com" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">安全な dotenv – dotenv の作成者による</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://dotenvx.com</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="GitHub,Rust" data-url="https://github.com/lapce/lapce">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/lapce/lapce" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/12/04 03:13</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="GitHub">#GitHub</span><span class="tag" data-tag="Rust">#Rust</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://opengraph.githubassets.com/3554bd1e7cd24ac7a3e3b54a42a68033656d4751eea4b13af82ef55432e8b359/lapce/lapce" alt="Screenshot of https://github.com/lapce/lapce" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">Rust で書かれた超高速かつ強力なコード エディター - lapce/lapce</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/lapce/lapce</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="AI,GitHub,Go,デザイン" data-url="https://github.com/gotoailab/modern_mermaid">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/1083600474999107634/a_8aaf0459f90203194efb3b6b65031fde.gif" alt="Suginomoto" class="avatar">
+          <span class="author-name">Suginomoto</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/gotoailab/modern_mermaid" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/12/03 02:12</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="AI">#AI</span><span class="tag" data-tag="GitHub">#GitHub</span><span class="tag" data-tag="Go">#Go</span><span class="tag" data-tag="デザイン">#デザイン</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://opengraph.githubassets.com/64e6b7af3b7ed9d824db1fca0c86f40b18fc6e3c78704b5b24f21c89fc979300/gotoailab/modern_mermaid" alt="Screenshot of https://github.com/gotoailab/modern_mermaid" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">ライブ プレビュー、複数のテーマ、高品質のエクスポートを備えたモダンで美しい Mermaid.js エディター。開発者、デザイナー、プロダクト マネージャーに最適です。 - gotoailab/modern_mermaid</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/gotoailab/modern_mermaid</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="CSS,GitHub" data-url="https://github.com/cafeTechne/Final-Fantasy-CSS">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/1083600474999107634/a_8aaf0459f90203194efb3b6b65031fde.gif" alt="Suginomoto" class="avatar">
+          <span class="author-name">Suginomoto</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/cafeTechne/Final-Fantasy-CSS" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/12/02 02:34</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="CSS">#CSS</span><span class="tag" data-tag="GitHub">#GitHub</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://opengraph.githubassets.com/183f10a595ed72dd918ac68fea4863c4e7cc28dc916e4c920dcc7dffd2a4a5a4/cafeTechne/Final-Fantasy-CSS" alt="Screenshot of https://github.com/cafeTechne/Final-Fantasy-CSS" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">私の青春時代のゲームへのラブレター。レトロなファイナルファンタジー ゲームのメニューからインスピレーションを得た CSS コンポーネント。 - カフェテクネ/ファイナルファンタジー-CSS</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/cafeTechne/Final-Fantasy-CSS</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="GitHub" data-url="https://github.com/vicinaehq/vicinae">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/vicinaehq/vicinae" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/12/01 06:41</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="GitHub">#GitHub</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://opengraph.githubassets.com/155f2feda6eab202f616294114c917b883628c1656e6a4e55bf92e99a4abadd3/vicinaehq/vicinae" alt="Screenshot of https://github.com/vicinaehq/vicinae" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">デスクトップ向けの集中ランチャー - ネイティブ、高速、拡張可能 - vicinaehq/vicinae</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/vicinaehq/vicinae</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="動画" data-url="https://landonorris.com/">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://landonorris.com/" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/12/01 06:26</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="動画">#動画</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://cdn.prod.website-files.com/67b5a02dc5d338960b17a7e9/68eb91477bcf3ee7d055ab45_lando-OpenGraph.webp" alt="Screenshot of https://landonorris.com/" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">英国のレーシング スター、ランド ノリスの公式ハブ: 最新ニュース、2025 年のレース勝利、独占グッズ、ビデオ、舞台裏へのアクセスなど。</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://landonorris.com/</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="GitHub" data-url="https://github.com/arkadiyt/zoom-redirector">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/arkadiyt/zoom-redirector" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/12/01 06:12</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="GitHub">#GitHub</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://repository-images.githubusercontent.com/249254447/6e245800-6c3a-11ea-8244-c8ab2f81f649" alt="Screenshot of https://github.com/arkadiyt/zoom-redirector" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">Zoom Redirector は、Zoom のブラウザベースの Web クライアントを使用するために会議リンクを透過的にリダイレクトするブラウザ拡張機能です。 - arkadiyt/ズームリダイレクター</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/arkadiyt/zoom-redirector</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="GitHub" data-url="https://github.com/alvaniss/privacy-dots">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/alvaniss/privacy-dots" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/30 11:01</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="GitHub">#GitHub</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://opengraph.githubassets.com/cc6c8e75444671f55dcaaf4f50b5c2dc1044b7c2f24888e0f5205c07926e61de/alvaniss/privacy-dots" alt="Screenshot of https://github.com/alvaniss/privacy-dots" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">ステータスバー用のプライバシー最優先モジュール。 GitHub でアカウントを作成して、alvaniss/privacy-dots の開発に貢献してください。</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/alvaniss/privacy-dots</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="GitHub,Go" data-url="https://unchihugo.github.io/FluentFlyout/">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://unchihugo.github.io/FluentFlyout/" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/29 14:26</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="GitHub">#GitHub</span><span class="tag" data-tag="Go">#Go</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="screenshots/15c465df6eb4fbc146af81608141bc41.jpg" alt="Screenshot of https://unchihugo.github.io/FluentFlyout/" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="message-excerpt">https://unchihugo.github.io/FluentFlyout/</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="AI,Ai agent,Ai coding,Claude code,Coding assistant,Deepseek,Gemini,Gpt,Grok,Llm,Openrouter" data-url="https://claudish.com/">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://claudish.com/" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/26 14:46</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="AI">#AI</span><span class="tag" data-tag="Ai agent">#Ai agent</span><span class="tag" data-tag="Ai coding">#Ai coding</span><span class="tag" data-tag="Claude code">#Claude code</span><span class="tag" data-tag="Coding assistant">#Coding assistant</span><span class="tag" data-tag="Deepseek">#Deepseek</span><span class="tag" data-tag="Gemini">#Gemini</span><span class="tag" data-tag="Gpt">#Gpt</span><span class="tag" data-tag="Grok">#Grok</span><span class="tag" data-tag="Llm">#Llm</span><span class="tag" data-tag="Openrouter">#Openrouter</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://claudish.com/og-image.png" alt="Screenshot of https://claudish.com/" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">世界で最も強力なコーディング エージェントで 580 以上の AI モデルのロックを解除します。 Grok、Gemini、GPT、DeepSeek をネイティブに実行します。完全に無料で始めましょう。</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://claudish.com/</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="" data-url="https://proton.me/ja/pass">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://proton.me/ja/pass" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/26 11:38</span>
+        </div>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://pmecdn.protonweb.com/image-transformation/?s=s&image=Zx_Ij_I4_F3_Nbk_B_Xt_CR_Proton_Pass_0b5caf9c97.png" alt="Screenshot of https://proton.me/ja/pass" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">オープンソースの無料パスワードマネージャーを使えば、パスワード、パスキー、メールエイリアスなどをあらゆるデバイスで保管、共有、同期できます。 トライアルなし、ずっと無料。</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://proton.me/ja/pass</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="GitHub,UX" data-url="https://github.com/khcrysalis/PlumeImpactor">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/khcrysalis/PlumeImpactor" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/26 11:37</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="GitHub">#GitHub</span><span class="tag" data-tag="UX">#UX</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://opengraph.githubassets.com/c427c525faf6b29bf98b6a938957b513f4183706ec852df6d05f01ac8b3da4a5/khcrysalis/PlumeImpactor" alt="Screenshot of https://github.com/khcrysalis/PlumeImpactor" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">オープンソース、クロスプラットフォーム、機能豊富な iOS/tvOS サイドローディング アプリケーション。 macOS、Linux、Windows をサポートします。 - ククリサリス/プルームインパクター</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/khcrysalis/PlumeImpactor</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="GitHub,Python,Rust" data-url="https://github.com/astral-sh/uv">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/astral-sh/uv" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/25 12:04</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="GitHub">#GitHub</span><span class="tag" data-tag="Python">#Python</span><span class="tag" data-tag="Rust">#Rust</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://opengraph.githubassets.com/bfdb5c3f7e0198f854fab613d578d5b3b119e371ef2f180b5c3f765a14f962f0/astral-sh/uv" alt="Screenshot of https://github.com/astral-sh/uv" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">Rust で書かれた非常に高速な Python パッケージおよびプロジェクト マネージャー。 - アストラル-sh/uv</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/astral-sh/uv</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="" data-url="https://www.graalvm.org/">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://www.graalvm.org/" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/24 09:48</span>
+        </div>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://www.graalvm.org/resources/img/og-image.jpg" alt="Screenshot of https://www.graalvm.org/" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">GraalVM は、事前にネイティブ イメージをコンパイルできる高度な JDK です。</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://www.graalvm.org/</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="AI,UI" data-url="https://windframe.dev/">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://windframe.dev/" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/24 05:01</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="AI">#AI</span><span class="tag" data-tag="UI">#UI</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://devwares-pull-zone.b-cdn.net/windframe-poster-image-1jj.png" alt="Screenshot of https://windframe.dev/" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">Tailwind CSS ビルダー/Tailwind Editor を使用して、1000 以上の簡単に編集可能な Tailwind テンプレート ブロックを使用して、息を呑むような Web サイト、Web ページ、Tailwind テンプレートを記録的な速さで作成します。</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://windframe.dev/</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="GitHub" data-url="https://github.com/CompassMB/MBCompass">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/CompassMB/MBCompass" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/21 14:47</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="GitHub">#GitHub</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://repository-images.githubusercontent.com/830628742/9e7f6fda-3112-4246-923a-dd8a4eff79a9" alt="Screenshot of https://github.com/CompassMB/MBCompass" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">広告、IAP、追跡なしの最新の FOSS コンパスおよびナビゲーション アプリ - CompassMB/MBCompass</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/CompassMB/MBCompass</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="Go,UI" data-url="https://antigravity.google/">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://antigravity.google/" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/21 14:21</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="Go">#Go</span><span class="tag" data-tag="UI">#UI</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://antigravity.google/assets/image/sitecards/sitecard-default.png" alt="Screenshot of https://antigravity.google/" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">Google Antigravity - 新しい方法を構築する</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://antigravity.google/</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="AI,GitHub,Go,UI,ツール" data-url="https://github.com/straight-tamago/misaka26">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/straight-tamago/misaka26" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/17 09:27</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="AI">#AI</span><span class="tag" data-tag="GitHub">#GitHub</span><span class="tag" data-tag="Go">#Go</span><span class="tag" data-tag="UI">#UI</span><span class="tag" data-tag="ツール">#ツール</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://opengraph.githubassets.com/a9eb15bda94d6aabbefa7db67a34caa4365d338fad37dec10239c4f2a254acb6/straight-tamago/misaka26" alt="Screenshot of https://github.com/straight-tamago/misaka26" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">iOS /iPadOS 16.0 - 26.1、TrollRestore を可能にするバグを利用した究極のカスタマイズ ツール。  - GitHub - Straight-tamago/misaka26: iOS /iPadOS 16.0 - 26.1、究極のカスタマイズ...</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/straight-tamago/misaka26</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="GitHub" data-url="https://github.com/hanakim3945/bl_sbx">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/hanakim3945/bl_sbx" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/15 18:33</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="GitHub">#GitHub</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://opengraph.githubassets.com/e7a79be65fbf735262ef76272b7f58941799704be5f2df47fde51de651fd90f1/hanakim3945/bl_sbx" alt="Screenshot of https://github.com/hanakim3945/bl_sbx" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">Itnessored と BookAssetd SBX からの脱出。 GitHub でアカウントを作成して、hanakim3945/BL_SBX 開発に貢献します。</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/hanakim3945/bl_sbx</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="GitHub,UI" data-url="https://github.com/getumbrel/umbrel/releases">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/526294675422838785/1b82c1362dddf27be5c92439d6d41a10.webp" alt="ゴールドレンズ" class="avatar">
+          <span class="author-name">ゴールドレンズ</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/getumbrel/umbrel/releases" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/14 15:08</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="GitHub">#GitHub</span><span class="tag" data-tag="UI">#UI</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://opengraph.githubassets.com/995f64186dbe5ee5e8a718556aefc1744bc2b2300aebc18137471bff7704f873/getumbrel/umbrel" alt="Screenshot of https://github.com/getumbrel/umbrel/releases" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">アプリストアを備えたセルフホスティング用の美しいホームサーバー OS。 umbrelOS を備えた事前構築済みの Umbrel Home を購入するか、Raspberry Pi または任意の x86 システムにインストールします。 - ゲット傘/傘</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/getumbrel/umbrel/releases</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="AI" data-url="https://zed.dev/">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://zed.dev/" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/14 09:38</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="AI">#AI</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://zed.dev/img/home/og.webp" alt="Screenshot of https://zed.dev/" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">Zed は、Atom と Tree-sitter の作成者による高性能のマルチプレイヤー コード エディタです。</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://zed.dev/</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="AI,UI" data-url="https://cursor.com/ja">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://cursor.com/ja" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/13 14:03</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="AI">#AI</span><span class="tag" data-tag="UI">#UI</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://cursor.com/public/opengraph-image.png" alt="Screenshot of https://cursor.com/ja" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">Cursor は、生産性を大幅に向上させるために構築されており、AI を使用してコーディングするための最良の方法です。</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://cursor.com/ja</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="" data-url="https://geph.io/en">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://geph.io/en" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/13 09:28</span>
+        </div>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="screenshots/6317c0d48f78b636b97b77599d254aed.jpg" alt="Screenshot of https://geph.io/en" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="message-excerpt">https://geph.io/en</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="AI,GitHub" data-url="https://github.com/twofas">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/twofas" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/13 09:27</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="AI">#AI</span><span class="tag" data-tag="GitHub">#GitHub</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://avatars.githubusercontent.com/u/18189374?s=280&v=4" alt="Screenshot of https://github.com/twofas" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">2FAS には 8 つのリポジトリが利用可能です。 GitHub でコードをフォローしてください。</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/twofas</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="動画" data-url="https://lowtechguys.com/clop">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://lowtechguys.com/clop" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/13 02:28</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="動画">#動画</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://img.panaitiu.com/_/1200/plain/https://lowtechguys.com/static/img/clop-screenshot.png" alt="Screenshot of https://lowtechguys.com/clop" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">画像、ビデオ、PDF、クリップボードのオプティマイザー。大きくコピー、小さくペースト、高速送信</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://lowtechguys.com/clop</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="GitHub" data-url="https://github.com/maniacx/Bluetooth-Battery-Meter/tree/SONY">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/maniacx/Bluetooth-Battery-Meter/tree/SONY" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/13 02:27</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="GitHub">#GitHub</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="screenshots/db2c1fd34a5380f2a7f8f8a5397dac8d.jpg" alt="Screenshot of https://github.com/maniacx/Bluetooth-Battery-Meter/tree/SONY" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="message-excerpt">https://github.com/maniacx/Bluetooth-Battery-Meter/tree/SONY</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="GitHub,UX" data-url="https://github.com/pwr-Solaar/Solaar">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/pwr-Solaar/Solaar" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/13 02:25</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="GitHub">#GitHub</span><span class="tag" data-tag="UX">#UX</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://opengraph.githubassets.com/4a7237e245f671c8c76507ba833abf7ba7f46550abd4ab09dbd1218df2cf64b3/pwr-Solaar/Solaar" alt="Screenshot of https://github.com/pwr-Solaar/Solaar" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">Logitech デバイス用の Linux デバイス マネージャー。 GitHub でアカウントを作成して、powr-Solaar/Solaar の開発に貢献してください。</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/pwr-Solaar/Solaar</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="" data-url="https://helium.computer/">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://helium.computer/" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/12 12:37</span>
+        </div>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://helium.computer/embed.png" alt="Screenshot of https://helium.computer/" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">愛を込めて人々のために作られた Web ブラウザ。デフォルトで最高のプライバシー、公平な広告ブロック、肥大化やノイズはありません。完全にオープンソース。</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://helium.computer/</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="" data-url="https://www.oracle.com/jp/cloud/">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://www.oracle.com/jp/cloud/" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/12 02:14</span>
+        </div>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://www.oracle.com/a/ocom/img/social-og-oci-logo-1200x628.jpg" alt="Screenshot of https://www.oracle.com/jp/cloud/" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">業界に特化して設計され、必要な場所で利用できるクラウド・ソリューションにより、コストを削減し、効率を最大化することができます。</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://www.oracle.com/jp/cloud/</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="AI" data-url="https://huggingface.co/WeiboAI/VibeThinker-1.5B">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://huggingface.co/WeiboAI/VibeThinker-1.5B" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/11 07:13</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="AI">#AI</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://cdn-thumbnails.huggingface.co/social-thumbnails/models/WeiboAI/VibeThinker-1.5B.png" alt="Screenshot of https://huggingface.co/WeiboAI/VibeThinker-1.5B" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">私たちは、オープンソースとオープン サイエンスを通じて人工知能を進歩させ、民主化する旅の途中にあります。</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://huggingface.co/WeiboAI/VibeThinker-1.5B</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="" data-url="https://www.xrea.com/">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/526294675422838785/1b82c1362dddf27be5c92439d6d41a10.webp" alt="ゴールドレンズ" class="avatar">
+          <span class="author-name">ゴールドレンズ</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://www.xrea.com/" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/10 12:40</span>
+        </div>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="screenshots/6ca5eb1c132ca197f1d84a8edc8a3851.jpg" alt="Screenshot of https://www.xrea.com/" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="message-excerpt">https://www.xrea.com/</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="" data-url="https://syncthing.net/">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://syncthing.net/" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/10 10:24</span>
+        </div>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="screenshots/08efbc137d06163b10e8654570accca8.jpg" alt="Screenshot of https://syncthing.net/" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="message-excerpt">https://syncthing.net/</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="データベース" data-url="https://grafana.com/ja/">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://grafana.com/ja/" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/08 21:21</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="データベース">#データベース</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://grafana.com/media/images/meta/grafana-labs-meta-default_1200x630.png" alt="Screenshot of https://grafana.com/ja/" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">Grafanaは、あらゆるデータベースに対応するオープンソースの分析＆監視ソリューションです。</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://grafana.com/ja/</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="UI" data-url="https://jellyfin.org/">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://jellyfin.org/" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/08 21:21</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="UI">#UI</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://jellyfin.org/images/social.png?v2" alt="Screenshot of https://jellyfin.org/" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">ボランティアによって構築されたメディア ソリューションで、メディアを管理できます。独自のサーバーから任意のデバイスに、文字列を付けずにストリーミングします。</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://jellyfin.org/</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="" data-url="https://randoma11y.com">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://randoma11y.com" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/08 12:25</span>
+        </div>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://randoma11y-feed.adam-f8f.workers.dev/og-image.svg?bg=%23111111&fg=%23FFFFFF" alt="Screenshot of https://randoma11y.com" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">リアルタイムの色の遊び場である RandomA11y を使用して、何百万ものアクセス可能な色の組み合わせを見つけてください。</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://randoma11y.com</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="" data-url="https://ublockorigin.com/jp">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://ublockorigin.com/jp" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/08 12:24</span>
+        </div>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://ublockorigin.com/img/favicons/opengraph.png" alt="Screenshot of https://ublockorigin.com/jp" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">uBlock Originはただの「広告ブロッカー」ではなく、主要機能としてCPUやメモリー効率を備えた広域コンテンツブロッカーです. Developed by Raymond Hill.</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://ublockorigin.com/jp</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="GitHub,動画" data-url="https://github.com/yt-dlp/yt-dlp">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/yt-dlp/yt-dlp" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/08 12:20</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="GitHub">#GitHub</span><span class="tag" data-tag="動画">#動画</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://repository-images.githubusercontent.com/307260205/b6a8d716-9c7b-40ec-bc44-6422d8b741a0" alt="Screenshot of https://github.com/yt-dlp/yt-dlp" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">機能豊富なコマンドラインのオーディオ/ビデオ ダウンローダー - yt-dlp/yt-dlp</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/yt-dlp/yt-dlp</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="AI,GitHub,UX" data-url="https://github.com/Vencord/Vesktop">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/Vencord/Vesktop" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/08 12:19</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="AI">#AI</span><span class="tag" data-tag="GitHub">#GitHub</span><span class="tag" data-tag="UX">#UX</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://opengraph.githubassets.com/a1ed84764fdfed9f0c2591c80c43b13a930fa9c9f6f2272d339a601d2ec32b88/Vencord/Vesktop" alt="Screenshot of https://github.com/Vencord/Vesktop" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">Vesktop は、パフォーマンスの向上と Linux サポートの向上を目的としたカスタム Discord アプリです - Vencord/Vesktop</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/Vencord/Vesktop</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="デザイン" data-url="https://zen-browser.app/">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://zen-browser.app/" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/08 12:18</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="デザイン">#デザイン</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="screenshots/3eb877927f0817e0440732328c403294.jpg" alt="Screenshot of https://zen-browser.app/" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">美しくデザインされ、プライバシーを重視し、豊富な機能が満載です。</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://zen-browser.app/</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="GitHub,UI" data-url="https://github.com/Flow-Launcher/Flow.Launcher">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/Flow-Launcher/Flow.Launcher" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/08 12:16</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="GitHub">#GitHub</span><span class="tag" data-tag="UI">#UI</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://repository-images.githubusercontent.com/257526212/8a4cf2fd-2c9c-424b-a8b9-4cfef901259b" alt="Screenshot of https://github.com/Flow-Launcher/Flow.Launcher" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">:mag: コミュニティ作成のプラグインを使用した Windows 用のクイック ファイル検索とアプリ ランチャー - Flow-Launcher/Flow.Launcher</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/Flow-Launcher/Flow.Launcher</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="GitHub" data-url="https://github.com/itorr/homo">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/itorr/homo" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/08 12:15</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="GitHub">#GitHub</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://opengraph.githubassets.com/c5393b9da5f03c295c25a3865606a100877fceb94b4586ff1244a560757b9f3b/itorr/homo" alt="Screenshot of https://github.com/itorr/homo" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">💩「恶臭数字论证器」数字恶臭化工具. Contribute to itorr/homo development by creating an account on GitHub.</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/itorr/homo</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="" data-url="https://lab.magiconch.com/homo/">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://lab.magiconch.com/homo/" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/08 12:14</span>
+        </div>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="screenshots/c6184793e04e82253e2b9399f968c834.jpg" alt="Screenshot of https://lab.magiconch.com/homo/" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="message-excerpt">https://lab.magiconch.com/homo/</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="GitHub" data-url="https://github.com/dayanch96/YTLite">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/dayanch96/YTLite" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/08 12:10</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="GitHub">#GitHub</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://opengraph.githubassets.com/36d29e5081704dfbd07215bb1e4a63d051d1e5c1a61f6604a7394928ef37aec4/dayanch96/YTLite" alt="Screenshot of https://github.com/dayanch96/YTLite" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">iOS 上の YouTube 用の柔軟なエンハンサー。 GitHub でアカウントを作成して、dayanch96/YTLite の開発に貢献してください。</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/dayanch96/YTLite</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="GitHub" data-url="https://github.com/NeoFreeBird/app">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/NeoFreeBird/app" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/08 12:10</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="GitHub">#GitHub</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://opengraph.githubassets.com/dd1fb52c60dc25a17497b68f0f37d0ac15133ca90e8149e49e11ca04ebc09cb9/NeoFreeBird/app" alt="Screenshot of https://github.com/NeoFreeBird/app" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">ブランドの元に戻す、BHTwitter、その他の QoL を変更した、変更された Twitter アプリ。 - NeoFreeBird/アプリ</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/NeoFreeBird/app</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="GitHub,セキュリティ" data-url="https://github.com/yokoffing/Betterfox">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/yokoffing/Betterfox" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/08 10:53</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="GitHub">#GitHub</span><span class="tag" data-tag="セキュリティ">#セキュリティ</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://opengraph.githubassets.com/4f65d6cbd939bb8b1009ffe7ca7e4b6d89def16872f8987af7c84b4dc6bada01/yokoffing/Betterfox" alt="Screenshot of https://github.com/yokoffing/Betterfox" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">最適なプライバシーとセキュリティを実現する Firefox user.js。お気に入りのブラウザですが、それ以上のブラウザです。 - ヨコフィン/ベターフォックス</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/yokoffing/Betterfox</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="GitHub,Go" data-url="https://github.com/GooseMod/OpenAsar">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/GooseMod/OpenAsar" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/08 10:52</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="GitHub">#GitHub</span><span class="tag" data-tag="Go">#Go</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://opengraph.githubassets.com/43c6c821cda4112af795e847ce8a2a37b8befa3b2fc9fea76a1f2f7f5b415914/GooseMod/OpenAsar" alt="Screenshot of https://github.com/GooseMod/OpenAsar" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">Discord デスクトップの app.asar のオープンソース代替 - GooseMod/OpenAsar</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/GooseMod/OpenAsar</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="Atlasos,Gaming performance,Gaming windows,Privacy-focused os,Windows debloat,デザイン" data-url="https://atlasos.net/">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://atlasos.net/" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/08 10:51</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="Atlasos">#Atlasos</span><span class="tag" data-tag="Gaming performance">#Gaming performance</span><span class="tag" data-tag="Gaming windows">#Gaming windows</span><span class="tag" data-tag="Privacy-focused os">#Privacy-focused os</span><span class="tag" data-tag="Windows debloat">#Windows debloat</span><span class="tag" data-tag="デザイン">#デザイン</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://atlasos.net/defaultimg.png" alt="Screenshot of https://atlasos.net/" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">AtlasOS は Windows の最適化されたバージョンであり、愛好家やゲーマー向けに設計されています。より高速なパフォーマンス、より優れたプライバシー、強化されたゲーム機能を体験してください。</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://atlasos.net/</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="GitHub" data-url="https://github.com/moudey/shell">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/moudey/shell" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/08 10:50</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="GitHub">#GitHub</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://opengraph.githubassets.com/5cc7f7e6c25a779977b4b6969716587af223fff9a4e860f02955ad835149bace/moudey/Shell" alt="Screenshot of https://github.com/moudey/shell" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">Windows ファイル エクスプローラー用の強力なコンテキスト メニュー マネージャー - moudey/Shell</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/moudey/shell</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="Bt downloader,Download manager,Go,Gopeed,Http downloader" data-url="https://gopeed.com/">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://gopeed.com/" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/08 10:49</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="Bt downloader">#Bt downloader</span><span class="tag" data-tag="Download manager">#Download manager</span><span class="tag" data-tag="Go">#Go</span><span class="tag" data-tag="Gopeed">#Gopeed</span><span class="tag" data-tag="Http downloader">#Http downloader</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://gopeed.com/images/logo.png" alt="Screenshot of https://gopeed.com/" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">オープンソース、軽量、ネイティブ、ダウンロード用 (HTTP、BitTorrent、Magnet など) をサポートします。</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://gopeed.com/</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="GitHub,ツール" data-url="https://github.com/emoacht/Monitorian">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://github.com/emoacht/Monitorian" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/08 10:47</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="GitHub">#GitHub</span><span class="tag" data-tag="ツール">#ツール</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://opengraph.githubassets.com/a72804d5bd8d99260824474df7f329f4817c8748a0a75a45d1baebce29bb6baf/emoacht/Monitorian" alt="Screenshot of https://github.com/emoacht/Monitorian" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">複数のモニターの明るさを簡単に調整する Windows デスクトップ ツール - emoacht/Monitorian</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://github.com/emoacht/Monitorian</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="" data-url="https://controld.com/free-dns">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://controld.com/free-dns" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/08 10:46</span>
+        </div>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://controld.com/social/og_image.png" alt="Screenshot of https://controld.com/free-dns" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">Control D の無料 DNS サーバーは、マルウェア、安全でない公共 Wi-Fi、広告などからデバイスを保護します。今すぐサインアップして、オンラインを安全に保ちましょう。</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://controld.com/free-dns</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="" data-url="https://nextdns.io/">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://nextdns.io/" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/08 10:46</span>
+        </div>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://nextdns.io/static/og-image.jpg" alt="Screenshot of https://nextdns.io/" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">現代のインターネットのための新しいファイアウォール</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://nextdns.io/</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="" data-url="https://cobalt.meowing.de/">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://cobalt.meowing.de/" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/08 10:41</span>
+        </div>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="screenshots/50bdbf667a832b0d763cd541c6d1ef1a.jpg" alt="Screenshot of https://cobalt.meowing.de/" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">cobalt を使用すると、広告、追跡、ペイウォール、その他のナンセンスなしで、お気に入りのものを保存できます。リンクを貼り付けるだけで準備完了です。</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://cobalt.meowing.de/</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="ツール" data-url="https://localsend.org/ja">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://localsend.org/ja" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/08 10:37</span>
+        </div>
+      </div>
+      
+      <div class="tags-wrapper">
+        <div class="tags">
+          <span class="tag" data-tag="ツール">#ツール</span>
+        </div>
+        <button class="tags-toggle-btn" title="タグを展開/折りたたむ">
+          <span class="toggle-icon">▼</span>
+        </button>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="screenshots/25c214c00b73fa6723e798591744f4ea.jpg" alt="Screenshot of https://localsend.org/ja" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">LocalSend は、近くのデバイスとファイルを共有できる無料のオープンソース・クロスプラットフォームツールです。</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://localsend.org/ja</div>
+      
+    </li>
+  
+    <li class="link-item" data-tags="" data-url="https://www.cube-soft.jp/cubeice/">
+      <div class="link-header">
+        <div class="author-info">
+          <img src="https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp" alt="Anertz" class="avatar">
+          <span class="author-name">Anertz</span>
+        </div>
+        <div class="header-right">
+          <button class="favorite-btn" data-url="https://www.cube-soft.jp/cubeice/" title="お気に入りに追加">
+            <span class="star-icon">☆</span>
+          </button>
+          <span class="timestamp">2025/11/08 10:37</span>
+        </div>
+      </div>
+      
+      
+      <div class="screenshot-container">
+        <img src="https://raw.githubusercontent.com/cube-soft/Cube.Assets/master/cubeice/overview.ja.png" alt="Screenshot of https://www.cube-soft.jp/cubeice/" class="screenshot" loading="lazy">
+      </div>
+      
+      
+      <div class="description-wrapper">
+        <div class="description">CubeICE は Mac で作成された ZIP ファイル等を解凍する時に起こりがちな文字化けを防止できる圧縮・解凍アプリです。AES-256 等で暗号化されたファイルにも対応しています。</div>
+        <button class="description-toggle-btn" title="続きを読む">...</button>
+      </div>
+      
+      <div class="message-excerpt">https://www.cube-soft.jp/cubeice/</div>
+      
+    </li>
+  
+    </ul>
+
+    <footer>
+      <p>最終更新: 2025/12/27 8:25:08</p>
+      <p>Generated by Discord Link Archive</p>
+    </footer>
+  </div>
+
+  <script>
+    let activeFilter = null;
+
+    // お気に入りフィルターをトグル
+    function toggleFavorites(event) {
+      event.preventDefault();
+      const urlParams = new URLSearchParams(window.location.search);
+      const favoritesParam = urlParams.get('favorites');
+      
+      if (favoritesParam === 'true') {
+        // 現在フィルター中の場合は解除してメインページに戻る
+        window.location.href = 'index.html';
+      } else {
+        // フィルターを適用
+        window.location.href = 'index.html?favorites=true';
+      }
+    }
+
+    function filterByTag(tag) {
+      activeFilter = tag;
+      const linkItems = document.querySelectorAll('.link-item');
+      const filterTags = document.querySelectorAll('.filter-tag');
+
+      // フィルタータグのアクティブ状態を更新
+      filterTags.forEach(filterTag => {
+        if (filterTag.textContent === '#' + tag) {
+          filterTag.classList.add('active');
+        } else {
+          filterTag.classList.remove('active');
+        }
+      });
+
+      // リンクアイテムをフィルタリング
+      linkItems.forEach(item => {
+        const tags = item.dataset.tags.split(',');
+        if (tags.includes(tag)) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+
+      // タグクリックでもフィルタリング
+      document.querySelectorAll('.tag').forEach(tagElement => {
+        tagElement.onclick = function() {
+          const clickedTag = this.dataset.tag;
+          filterByTag(clickedTag);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+      });
+    }
+
+    function clearFilter() {
+      activeFilter = null;
+      const linkItems = document.querySelectorAll('.link-item');
+      const filterTags = document.querySelectorAll('.filter-tag');
+
+      // すべてのフィルタータグの選択を解除
+      filterTags.forEach(filterTag => {
+        filterTag.classList.remove('active');
+      });
+
+      // すべてのリンクアイテムを表示
+      linkItems.forEach(item => {
+        item.classList.remove('hidden');
+      });
+    }
+
+    // ページ読み込み時にタグクリックイベントを設定
+    document.addEventListener('DOMContentLoaded', function() {
+      // お気に入り状態を復元（フィルタリングの前に実行）
+      loadFavorites();
+
+      // URLパラメータからタグとお気に入りフラグを読み取る
+      const urlParams = new URLSearchParams(window.location.search);
+      const tagParam = urlParams.get('tag');
+      const favoritesParam = urlParams.get('favorites');
+      
+      // お気に入りボタンの状態を更新
+      const favoritesLink = document.getElementById('favorites-link');
+      if (favoritesParam === 'true' && favoritesLink) {
+        favoritesLink.classList.add('active');
+      }
+      
+      if (tagParam) {
+        // URLパラメータにタグが指定されている場合、フィルタリングを実行
+        filterByTag(tagParam);
+      } else if (favoritesParam === 'true') {
+        // お気に入りのみを表示
+        filterFavorites();
+      }
+
+      // タグクリックイベント
+      document.querySelectorAll('.tag').forEach(tagElement => {
+        tagElement.onclick = function() {
+          const clickedTag = this.dataset.tag;
+          filterByTag(clickedTag);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+      });
+
+
+      // 説明文の展開ボタン（2行以内の場合は非表示）
+      document.querySelectorAll('.description-wrapper').forEach(wrapper => {
+        const description = wrapper.querySelector('.description');
+        const btn = wrapper.querySelector('.description-toggle-btn');
+        
+        // テキストが切り詰められていない場合はボタンを非表示
+        if (description.scrollHeight <= description.clientHeight) {
+          btn.style.display = 'none';
+        }
+        
+        btn.onclick = function(e) {
+          e.stopPropagation();
+          description.classList.toggle('expanded');
+          this.classList.toggle('expanded');
+        };
+      });
+    });
+
+    // LocalStorageからお気に入りを読み込む
+    function loadFavorites() {
+      const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+      const buttons = document.querySelectorAll('.favorite-btn');
+      buttons.forEach(btn => {
+        if (favorites.includes(btn.dataset.url)) {
+          btn.classList.add('active');
+          btn.querySelector('.star-icon').textContent = '★';
+        }
+      });
+    }
+
+    // お気に入りを切り替える
+    function toggleFavorite(url, button) {
+      const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+      const index = favorites.indexOf(url);
+
+      if (index > -1) {
+        // お気に入りから削除
+        favorites.splice(index, 1);
+        button.classList.remove('active');
+        button.querySelector('.star-icon').textContent = '☆';
+      } else {
+        // お気に入りに追加
+        favorites.push(url);
+        button.classList.add('active');
+        button.querySelector('.star-icon').textContent = '★';
+      }
+
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+    }
+
+    // お気に入りボタンにイベントを設定
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.favorite-btn').forEach(btn => {
+        btn.onclick = function() {
+          const url = this.dataset.url;
+          toggleFavorite(url, this);
+        };
+      });
+    });
+
+    // お気に入りでフィルタリング
+    function filterFavorites() {
+      const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+      const linkItems = document.querySelectorAll('.link-item');
+
+      // お気に入りのみを表示
+      linkItems.forEach(item => {
+        const url = item.dataset.url;
+        if (favorites.includes(url)) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    }
+
+    // link-item全体をクリック可能にする
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.link-item').forEach(item => {
+        item.addEventListener('click', function(event) {
+          // お気に入りボタン、タグ、タグ展開ボタン、リンクURL自体のクリックは除外
+          if (event.target.closest('.favorite-btn') || 
+              event.target.closest('.tag') || 
+              event.target.closest('.tags-toggle-btn') ||
+              event.target.closest('.link-url')) {
+            return;
+          }
+          
+          // リンクURLを取得して新しいタブで開く
+          const url = this.dataset.url;
+          if (url) {
+            window.open(url, '_blank', 'noopener,noreferrer');
+          }
+        });
+      });
+
+      // タグの展開/折りたたみ機能
+      document.querySelectorAll('.tags-toggle-btn').forEach(btn => {
+        btn.addEventListener('click', function(event) {
+          event.stopPropagation(); // link-itemのクリックイベントを防ぐ
+          const tagsWrapper = this.closest('.tags-wrapper');
+          const tags = tagsWrapper.querySelector('.tags');
+          
+          tags.classList.toggle('expanded');
+          this.classList.toggle('expanded');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
