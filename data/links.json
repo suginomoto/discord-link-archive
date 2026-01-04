@@ -1,0 +1,1815 @@
+[
+  {
+    "url": "https://github.com/infiniV/VoiceFlow",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-12-26T11:53:24.629Z",
+    "messageId": "1454079652413964391",
+    "content": "https://github.com/infiniV/VoiceFlow",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "GitHub - infiniV/VoiceFlow: VoiceFlow brings the power of OpenAI's Whisper directly to your Windows machine. It runs entirely on your hardware, ensuring your voice data never leaves your device. Designed for privacy, speed, and reliability.",
+    "description": "VoiceFlow brings the power of OpenAI&#39;s Whisper directly to your Windows machine. It runs entirely on your hardware, ensuring your voice data never leaves your device. Designed for privacy, spee...",
+    "descriptionJa": "VoiceFlow は、OpenAI の Whisper のパワーを Windows マシンに直接もたらします。完全にハードウェア上で実行され、音声データがデバイスから流出することはありません。プライバシー、スピードを考慮した設計",
+    "metaTags": [
+      "GitHub",
+      "AI",
+      "デザイン"
+    ],
+    "image": "https://opengraph.githubassets.com/9eb4c0ccf5dad1a13f51cfe338b939ac6f5513caf2001365820f833461a4dd1d/infiniV/VoiceFlow",
+    "tags": [
+      "AI",
+      "GitHub",
+      "デザイン"
+    ],
+    "screenshot": "screenshots/eb735c4ce888c42647b492f1fcea68f6.jpg"
+  },
+  {
+    "url": "https://github.com/bullmeza/screen.vision",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-12-26T11:53:18.027Z",
+    "messageId": "1454079624723173459",
+    "content": "https://github.com/bullmeza/screen.vision",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "GitHub - bullmeza/screen.vision: Get a guided tour for anything, right on your screen.",
+    "description": "Get a guided tour for anything, right on your screen. - bullmeza/screen.vision",
+    "descriptionJa": "画面上で、あらゆるものについてのガイド付きツアーを入手できます。 - ブルメザ/screen.vision",
+    "metaTags": [
+      "GitHub",
+      "UI",
+      "ガイド"
+    ],
+    "image": "https://opengraph.githubassets.com/1dab946f3feb8eeed8618b2d57f0c106a4f9db8dc9c7883b13079188afbac421/bullmeza/screen.vision",
+    "tags": [
+      "GitHub",
+      "UI",
+      "ガイド"
+    ],
+    "screenshot": "screenshots/50b2d6c14c44365838522bd3f9721de7.jpg"
+  },
+  {
+    "url": "https://github.com/chidiwilliams/buzz",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-12-15T19:32:14.109Z",
+    "messageId": "1450208852900581528",
+    "content": "https://github.com/chidiwilliams/buzz",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "GitHub - chidiwilliams/buzz: Buzz transcribes and translates audio offline on your personal computer. Powered by OpenAI's Whisper.",
+    "description": "Buzz transcribes and translates audio offline on your personal computer. Powered by OpenAI's Whisper. - chidiwilliams/buzz",
+    "descriptionJa": "Buzz は、パーソナル コンピュータ上で音声をオフラインで文字起こしおよび翻訳します。 OpenAI の Whisper を利用しています。 - シディウィリアムズ/バズ",
+    "metaTags": [
+      "GitHub",
+      "AI"
+    ],
+    "image": "https://opengraph.githubassets.com/f6ccb49016e61b15c64256a91c81a9536e5648171f1f7413953212dee4bd75eb/chidiwilliams/buzz",
+    "tags": [
+      "AI",
+      "GitHub"
+    ],
+    "screenshot": "screenshots/cb2bc4705571ec165a094dd2b03afeb2.jpg"
+  },
+  {
+    "url": "https://github.com/spipm/Depixelization_poc?utm_source=opensourceprojects.dev&ref=opensourceprojects.dev",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-12-12T09:43:11.373Z",
+    "messageId": "1448973451124674670",
+    "content": "https://github.com/spipm/Depixelization_poc?utm_source=opensourceprojects.dev&ref=opensourceprojects.dev",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "GitHub - spipm/Depixelization_poc at opensourceprojects.dev",
+    "description": "Depix is a PoC for a technique to recover plaintext from pixelized screenshots. - GitHub - spipm/Depixelization_poc at opensourceprojects.dev",
+    "descriptionJa": "Depix は、ピクセル化されたスクリーンショットから平文を復元する技術の PoC です。 - GitHub - spipm/Depixelization_poc (opensourceprojects.dev)",
+    "metaTags": [
+      "GitHub",
+      "AI"
+    ],
+    "image": "https://opengraph.githubassets.com/bb9658685362808f2441e43f79ba592f646f687c8cba538b288a233792710cc0/spipm/Depixelization_poc",
+    "tags": [
+      "AI",
+      "GitHub"
+    ],
+    "screenshot": "screenshots/7eca530735d01790fc1e5f71971f6f07.jpg"
+  },
+  {
+    "url": "https://fumadocs.dev/",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-12-11T04:30:17.944Z",
+    "messageId": "1448532321790726207",
+    "content": "https://fumadocs.dev/",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "Fumadocs",
+    "description": "The React.js documentation framework.",
+    "descriptionJa": "React.js ドキュメント フレームワーク。",
+    "metaTags": [
+      "React",
+      "ドキュメント",
+      "フレームワーク"
+    ],
+    "image": "https://www.fumadocs.dev/banner.png",
+    "tags": [
+      "React",
+      "ドキュメント",
+      "フレームワーク"
+    ],
+    "screenshot": null
+  },
+  {
+    "url": "https://localpdf.online",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-12-11T03:58:52.765Z",
+    "messageId": "1448524414776901714",
+    "content": "https://localpdf.online",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "LocalPDF Sanctuary | 100% Private Online PDF Tools (No Uploads)",
+    "description": "Free premium PDF toolbox. Merge, split, compress, and edit PDFs directly in your browser. 100% client-side processing, no file uploads, privacy-first design.",
+    "descriptionJa": "無料のプレミアム PDF ツールボックス。ブラウザ内で PDF を直接結合、分割、圧縮、編集できます。 100% クライアント側の処理、ファイルのアップロードなし、プライバシー優先の設計。",
+    "metaTags": [
+      "デザイン",
+      "ツール",
+      "Private pdf tools",
+      "Secure pdf editor",
+      "Localpdf sanctuary"
+    ],
+    "image": "https://localpdf.online/logos/localpdf-social-1200x630.png",
+    "tags": [
+      "Localpdf sanctuary",
+      "Private pdf tools",
+      "Secure pdf editor",
+      "ツール",
+      "デザイン"
+    ],
+    "screenshot": "screenshots/674218d67997ad9dacb9ad5ab6803d55.jpg"
+  },
+  {
+    "url": "https://www.granola.ai",
+    "author": {
+      "username": "suginomoto",
+      "displayName": "Suginomoto",
+      "id": "1083600474999107634",
+      "avatar": "https://cdn.discordapp.com/avatars/1083600474999107634/a_8aaf0459f90203194efb3b6b65031fde.gif"
+    },
+    "timestamp": "2025-12-10T01:04:59.267Z",
+    "messageId": "1448118265648779376",
+    "content": "https://www.granola.ai",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "Granola — The AI notepad for people in back-to-back meetings",
+    "description": "Granola takes your raw meeting notes and makes them awesome. No awkward meeting bots - just beautiful notes for you and your team, every single time.",
+    "descriptionJa": "Granola は、生の会議メモを取り込んで素晴らしいものにします。厄介な会議ボットは必要ありません。毎回、あなたとあなたのチームに美しいメモを残すだけです。",
+    "metaTags": [
+      "AI"
+    ],
+    "image": "https://granola.ai/opengraph-image.png?9f0ee69b11547e2f",
+    "tags": [
+      "AI"
+    ],
+    "screenshot": "screenshots/13e7671bc8186c15c240fccd1395a7a4.jpg"
+  },
+  {
+    "url": "https://willowvoice.com/",
+    "author": {
+      "username": "suginomoto",
+      "displayName": "Suginomoto",
+      "id": "1083600474999107634",
+      "avatar": "https://cdn.discordapp.com/avatars/1083600474999107634/a_8aaf0459f90203194efb3b6b65031fde.gif"
+    },
+    "timestamp": "2025-12-10T01:00:46.598Z",
+    "messageId": "1448117205878182011",
+    "content": "https://willowvoice.com/",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "AI Speech to Text Mac and iPhone Dictation Software | Willow",
+    "description": "Fast, accurate voice dictation for emails, documents, Cursor, note-taking, and messaging. Turn speech to text seamlessly, edit automatically, and stay secure with privacy. Boost productivity with context-aware AI and custom dictionaries. Get Willow Voice!",
+    "descriptionJa": "電子メール、文書、カーソル、メモ取り、メッセージングのための高速かつ正確な音声ディクテーション。音声をシームレスにテキストに変換し、自動的に編集し、プライバシーを確​​保して安全を確保します。コンテキスト認識 AI とカスタム辞書で生産性を向上します。ウィローボイスを手に入れよう！",
+    "metaTags": [
+      "AI"
+    ],
+    "image": "https://framerusercontent.com/images/0Wi8vOYi5Jeucrcdkv5hQVc.png",
+    "tags": [
+      "AI"
+    ],
+    "screenshot": "screenshots/4260aebd86ff7333f5a61be79a6f99bb.jpg"
+  },
+  {
+    "url": "https://github.com/IviriusCommunity/Rebound/",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-12-08T06:51:53.489Z",
+    "messageId": "1447480791092166666",
+    "content": "https://github.com/IviriusCommunity/Rebound/",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "GitHub - IviriusCommunity/Rebound: WinUI rewrite project of Windows 11 system apps.",
+    "description": "WinUI rewrite project of Windows 11 system apps. Contribute to IviriusCommunity/Rebound development by creating an account on GitHub.",
+    "descriptionJa": "Windows 11 システムアプリの WinUI 書き換えプロジェクト。 GitHub でアカウントを作成して、IviriusCommunity/Rebound の開発に貢献してください。",
+    "metaTags": [
+      "GitHub",
+      "UI"
+    ],
+    "image": "https://opengraph.githubassets.com/e12df4aff8a58a4fe07d91a3deb107fefe9cb00e5e4572eb500cf86bf419100e/IviriusCommunity/Rebound",
+    "tags": [
+      "GitHub",
+      "UI"
+    ],
+    "screenshot": "screenshots/3888d3b98a20d954730393534171c99b.jpg"
+  },
+  {
+    "url": "https://github.com/Ebullioscopic/Atoll",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-12-05T21:14:25.777Z",
+    "messageId": "1446610692323938384",
+    "content": "https://github.com/Ebullioscopic/Atoll",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "GitHub - Ebullioscopic/Atoll: Dynamic Island for macOS",
+    "description": "Dynamic Island for macOS. Contribute to Ebullioscopic/Atoll development by creating an account on GitHub.",
+    "descriptionJa": "macOS 用のダイナミック アイランド。 GitHub でアカウントを作成して、Ebullioscope/Atoll の開発に貢献してください。",
+    "metaTags": [
+      "GitHub"
+    ],
+    "image": "https://repository-images.githubusercontent.com/881723326/e97e8899-74d7-4072-bab5-4d89834574f4",
+    "tags": [
+      "GitHub",
+      "iOS"
+    ],
+    "screenshot": "screenshots/43efd300b5b934670f45ae508168037f.jpg"
+  },
+  {
+    "url": "https://github.com/TibixDev/winboat",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-12-05T08:37:03.315Z",
+    "messageId": "1446420092823797781",
+    "content": "https://github.com/TibixDev/winboat",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "GitHub - TibixDev/winboat: Run Windows apps on 🐧 Linux with ✨ seamless integration",
+    "description": "Run Windows apps on 🐧 Linux with ✨ seamless integration - TibixDev/winboat",
+    "descriptionJa": "✨ シームレスな統合により、🐧 Linux 上で Windows アプリを実行 - TibixDev/winboat",
+    "metaTags": [
+      "GitHub",
+      "UX"
+    ],
+    "image": "https://repository-images.githubusercontent.com/960420129/699936fe-eb73-47d1-aa22-e6fd0837066b",
+    "tags": [
+      "GitHub",
+      "UX"
+    ],
+    "screenshot": "screenshots/b889fba71722022340b6ff64093a6829.jpg"
+  },
+  {
+    "url": "https://dotenvx.com",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-12-04T04:30:32.700Z",
+    "messageId": "1445995668622807081",
+    "content": "https://dotenvx.com",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "dotenvx",
+    "description": "a secure dotenv–from the creator of dotenv",
+    "descriptionJa": "安全な dotenv – dotenv の作成者による",
+    "metaTags": [
+      "Dotenv",
+      ".env",
+      "Dotenvx",
+      "Dotenv-vault",
+      "Environments",
+      "Encrypt",
+      "Vault",
+      "Developer secrets",
+      "Secret manager",
+      "Share",
+      "Secretops"
+    ],
+    "image": "https://dotenvx.com/og-image.png",
+    "tags": [
+      ".env",
+      "Developer secrets",
+      "Dotenv",
+      "Dotenv-vault",
+      "Dotenvx",
+      "Encrypt",
+      "Environments",
+      "Secret manager",
+      "Secretops",
+      "Share",
+      "Twitter",
+      "Vault"
+    ],
+    "screenshot": "screenshots/c62061f61def35f430503469ce9c76d9.jpg"
+  },
+  {
+    "url": "https://github.com/lapce/lapce",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-12-04T03:13:37.637Z",
+    "messageId": "1445976311645606043",
+    "content": "https://github.com/lapce/lapce",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "GitHub - lapce/lapce: Lightning-fast and Powerful Code Editor written in Rust",
+    "description": "Lightning-fast and Powerful Code Editor written in Rust - lapce/lapce",
+    "descriptionJa": "Rust で書かれた超高速で強力なコード エディター - lapce/lapce",
+    "metaTags": [
+      "Rust",
+      "GitHub"
+    ],
+    "image": "https://opengraph.githubassets.com/503e4e1a0c8cc9e87527c73eb21d414b64d8da064900ab1f492746c38a628f1a/lapce/lapce",
+    "tags": [
+      "GitHub",
+      "Rust"
+    ],
+    "screenshot": "screenshots/8ca3f7ceeab529362e37b4bc03af453d.jpg"
+  },
+  {
+    "url": "https://github.com/gotoailab/modern_mermaid",
+    "author": {
+      "username": "suginomoto",
+      "displayName": "Suginomoto",
+      "id": "1083600474999107634",
+      "avatar": "https://cdn.discordapp.com/avatars/1083600474999107634/a_8aaf0459f90203194efb3b6b65031fde.gif"
+    },
+    "timestamp": "2025-12-03T02:12:40.772Z",
+    "messageId": "1445598585776509049",
+    "content": "https://github.com/gotoailab/modern_mermaid",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "GitHub - gotoailab/modern_mermaid: A modern, beautiful Mermaid.js editor with live preview, multiple themes, and high-quality export. Perfect for developers, designers, and product managers.",
+    "description": "A modern, beautiful Mermaid.js editor with live preview, multiple themes, and high-quality export. Perfect for developers, designers, and product managers. - gotoailab/modern_mermaid",
+    "descriptionJa": "ライブ プレビュー、複数のテーマ、高品質のエクスポートを備えたモダンで美しい Mermaid.js エディター。開発者、デザイナー、プロダクト マネージャーに最適です。 - gotoailab/modern_mermaid",
+    "metaTags": [
+      "Go",
+      "GitHub",
+      "AI",
+      "デザイン"
+    ],
+    "image": "https://opengraph.githubassets.com/a4f338b57116348e17efe8c2b67b69f8115de33ca5bd2aad3b9c602e79667de0/gotoailab/modern_mermaid",
+    "tags": [
+      "AI",
+      "GitHub",
+      "Go",
+      "デザイン"
+    ],
+    "screenshot": "screenshots/7db4356c35096882662e99a137285067.jpg"
+  },
+  {
+    "url": "https://github.com/cafeTechne/Final-Fantasy-CSS",
+    "author": {
+      "username": "suginomoto",
+      "displayName": "Suginomoto",
+      "id": "1083600474999107634",
+      "avatar": "https://cdn.discordapp.com/avatars/1083600474999107634/a_8aaf0459f90203194efb3b6b65031fde.gif"
+    },
+    "timestamp": "2025-12-02T02:34:11.718Z",
+    "messageId": "1445241612530618418",
+    "content": "https://github.com/cafeTechne/Final-Fantasy-CSS",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "GitHub - cafeTechne/Final-Fantasy-CSS: A love letter to the games of my youth. CSS components inspired by the menus of retro Final Fantasy Games.",
+    "description": "A love letter to the games of my youth. CSS components inspired by the menus of retro Final Fantasy Games. - cafeTechne/Final-Fantasy-CSS",
+    "descriptionJa": "私の青春時代のゲームへのラブレター。レトロなファイナルファンタジー ゲームのメニューからインスピレーションを得た CSS コンポーネント。 - カフェテクネ/ファイナルファンタジー-CSS",
+    "metaTags": [
+      "GitHub"
+    ],
+    "image": "https://opengraph.githubassets.com/183f10a595ed72dd918ac68fea4863c4e7cc28dc916e4c920dcc7dffd2a4a5a4/cafeTechne/Final-Fantasy-CSS",
+    "tags": [
+      "CSS",
+      "GitHub"
+    ],
+    "screenshot": "screenshots/fad691e24d2e2d174df5c820fb682066.jpg"
+  },
+  {
+    "url": "https://github.com/vicinaehq/vicinae",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-12-01T06:41:41.628Z",
+    "messageId": "1444941509702189177",
+    "content": "https://github.com/vicinaehq/vicinae",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "GitHub - vicinaehq/vicinae: A focused launcher for your desktop — native, fast, extensible",
+    "description": "A focused launcher for your desktop — native, fast, extensible - vicinaehq/vicinae",
+    "descriptionJa": "デスクトップ向けの集中ランチャー - ネイティブ、高速、拡張可能 - vicinaehq/vicinae",
+    "metaTags": [
+      "GitHub"
+    ],
+    "image": "https://opengraph.githubassets.com/0881d851e2d8e450d548d010832582bad3d7d77392e9e9bceb886004da38ac74/vicinaehq/vicinae",
+    "tags": [
+      "GitHub"
+    ],
+    "screenshot": "screenshots/2ed22841ba1eb836cacca041ccfa7b6c.jpg"
+  },
+  {
+    "url": "https://landonorris.com/",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-12-01T06:26:18.582Z",
+    "messageId": "1444937638166396928",
+    "content": "https://landonorris.com/",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "2025 McLaren Formula 1 Driver — Lando Norris",
+    "description": "Official hub for British racing star Lando Norris: breaking news, 2025 race wins, exclusive merch, videos and behind-the-scenes access.",
+    "descriptionJa": "英国のレーシング スター、ランド ノリスの公式ハブ: 最新ニュース、2025 年のレース勝利、独占グッズ、ビデオ、舞台裏へのアクセスなど。",
+    "metaTags": [
+      "動画"
+    ],
+    "image": "https://cdn.prod.website-files.com/67b5a02dc5d338960b17a7e9/68eb91477bcf3ee7d055ab45_lando-OpenGraph.webp",
+    "tags": [
+      "動画"
+    ],
+    "screenshot": null
+  },
+  {
+    "url": "https://github.com/arkadiyt/zoom-redirector",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-12-01T06:12:44.451Z",
+    "messageId": "1444934223453622456",
+    "content": "https://github.com/arkadiyt/zoom-redirector",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "GitHub - arkadiyt/zoom-redirector: Zoom Redirector is a browser extension that transparently redirects any meeting links to use Zoom's browser based web client.",
+    "description": "Zoom Redirector is a browser extension that transparently redirects any meeting links to use Zoom's browser based web client. - arkadiyt/zoom-redirector",
+    "descriptionJa": "Zoom Redirector は、Zoom のブラウザベースの Web クライアントを使用するために会議リンクを透過的にリダイレクトするブラウザ拡張機能です。 - arkadiyt/ズームリダイレクター",
+    "metaTags": [
+      "GitHub"
+    ],
+    "image": "https://repository-images.githubusercontent.com/249254447/6e245800-6c3a-11ea-8244-c8ab2f81f649",
+    "tags": [
+      "GitHub"
+    ],
+    "screenshot": "screenshots/71de850098071e7f8d355af710559dc2.jpg"
+  },
+  {
+    "url": "https://github.com/alvaniss/privacy-dots",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-30T11:01:48.154Z",
+    "messageId": "1444644580350758923",
+    "content": "https://github.com/alvaniss/privacy-dots",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "GitHub - alvaniss/privacy-dots: A privacy-first module for your status bar.",
+    "description": "A privacy-first module for your status bar. Contribute to alvaniss/privacy-dots development by creating an account on GitHub.",
+    "descriptionJa": "ステータスバー用のプライバシー最優先モジュール。 GitHub でアカウントを作成して、alvaniss/privacy-dots の開発に貢献してください。",
+    "metaTags": [
+      "GitHub"
+    ],
+    "image": "https://opengraph.githubassets.com/7d3944199654df7f76cc23116b0f48500f871025fe5169bed983ae822c2efaee/alvaniss/privacy-dots",
+    "tags": [
+      "GitHub"
+    ],
+    "screenshot": "screenshots/ce1f0e0536b9db3c6ba4937f025eddbc.jpg"
+  },
+  {
+    "url": "https://unchihugo.github.io/FluentFlyout/",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-29T14:26:13.664Z",
+    "messageId": "1444333637762945116",
+    "content": "https://unchihugo.github.io/FluentFlyout/",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "https://unchihugo.github.io/FluentFlyout/",
+    "description": "",
+    "descriptionJa": "",
+    "metaTags": [
+      "Go",
+      "GitHub"
+    ],
+    "image": "",
+    "tags": [
+      "GitHub",
+      "Go"
+    ],
+    "screenshot": "screenshots/15c465df6eb4fbc146af81608141bc41.jpg"
+  },
+  {
+    "url": "https://claudish.com/",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-26T14:46:45.958Z",
+    "messageId": "1443251642781667338",
+    "content": "https://claudish.com/",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "Claudish — Claude Code. Any Model.",
+    "description": "Unlock 580+ AI models in the world's most powerful coding agent. Run Grok, Gemini, GPT, DeepSeek natively. Start completely free.",
+    "descriptionJa": "世界で最も強力なコーディング エージェントで 580 以上の AI モデルのロックを解除します。 Grok、Gemini、GPT、DeepSeek をネイティブに実行します。完全に無料で始めましょう。",
+    "metaTags": [
+      "AI",
+      "Claude code",
+      "Ai coding",
+      "Grok",
+      "Gemini",
+      "Gpt",
+      "Deepseek",
+      "Openrouter",
+      "Ai agent",
+      "Coding assistant",
+      "Llm"
+    ],
+    "image": "https://claudish.com/og-image.png",
+    "tags": [
+      "AI",
+      "Ai agent",
+      "Ai coding",
+      "Claude code",
+      "Coding assistant",
+      "Deepseek",
+      "Gemini",
+      "Gpt",
+      "Grok",
+      "Llm",
+      "Openrouter"
+    ],
+    "screenshot": "screenshots/ef35f4a0de4b670d4216a3af5bc2b62e.jpg"
+  },
+  {
+    "url": "https://proton.me/ja/pass",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-26T11:38:03.704Z",
+    "messageId": "1443204153806557235",
+    "content": "https://proton.me/ja/pass",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "Proton Pass：ユーザー情報保護機能付きの無料パスワードマネージャー | Proton",
+    "description": "オープンソースの無料パスワードマネージャーを使えば、パスワード、パスキー、メールエイリアスなどをあらゆるデバイスで保管、共有、同期できます。 トライアルなし、ずっと無料。",
+    "descriptionJa": "オープンソースの無料パスワードマネージャーを使えば、パスワード、パスキー、メールエイリアスなどをあらゆるデバイスで保管、共有、同期できます。 トライアルなし、ずっと無料。",
+    "metaTags": [],
+    "image": "https://pmecdn.protonweb.com/image-transformation/?s=s&image=Zx_Ij_I4_F3_Nbk_B_Xt_CR_Proton_Pass_0b5caf9c97.png",
+    "tags": [],
+    "screenshot": "screenshots/275b93d0cf0b9bcf768ded53477cbabf.jpg"
+  },
+  {
+    "url": "https://github.com/khcrysalis/PlumeImpactor",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-26T11:37:42.642Z",
+    "messageId": "1443204065466257553",
+    "content": "https://github.com/khcrysalis/PlumeImpactor",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "GitHub - khcrysalis/PlumeImpactor: Open-source, cross-platform, and feature rich iOS/tvOS sideloading application. Supporting macOS, Linux, and Windows.",
+    "description": "Open-source, cross-platform, and feature rich iOS/tvOS sideloading application. Supporting macOS, Linux, and Windows. - khcrysalis/PlumeImpactor",
+    "descriptionJa": "オープンソース、クロスプラットフォーム、機能豊富な iOS/tvOS サイドローディング アプリケーション。 macOS、Linux、Windows をサポートします。 - ククリサリス/プルームインパクター",
+    "metaTags": [
+      "GitHub",
+      "UX"
+    ],
+    "image": "https://opengraph.githubassets.com/7a16ea2af79baa2a29a185b3e538f2153ad5579850c98d44d8d5505ea333a825/khcrysalis/PlumeImpactor",
+    "tags": [
+      "GitHub",
+      "UX"
+    ],
+    "screenshot": "screenshots/28fb2e8c30736101c3218afdce33fcbd.jpg"
+  },
+  {
+    "url": "https://github.com/astral-sh/uv",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-25T12:04:14.443Z",
+    "messageId": "1442848354097954836",
+    "content": "https://github.com/astral-sh/uv",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "GitHub - astral-sh/uv: An extremely fast Python package and project manager, written in Rust.",
+    "description": "An extremely fast Python package and project manager, written in Rust. - astral-sh/uv",
+    "descriptionJa": "Rust で書かれた非常に高速な Python パッケージおよびプロジェクト マネージャー。 - アストラル-sh/uv",
+    "metaTags": [
+      "Python",
+      "Rust",
+      "GitHub"
+    ],
+    "image": "https://opengraph.githubassets.com/d8a745bab11d0d7bc2b333fb68fb72b624c6c991775f770b299e44378c0a9f7d/astral-sh/uv",
+    "tags": [
+      "GitHub",
+      "Python",
+      "Rust"
+    ],
+    "screenshot": "screenshots/11604bd2a851951ed3c601a8cb090b07.jpg"
+  },
+  {
+    "url": "https://www.graalvm.org/",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-24T09:48:05.416Z",
+    "messageId": "1442451702849736938",
+    "content": "https://www.graalvm.org/",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "GraalVM",
+    "description": "GraalVM is an advanced JDK with ahead-of-time Native Image compilation.",
+    "descriptionJa": "GraalVM は、事前にネイティブ イメージをコンパイルできる高度な JDK です。",
+    "metaTags": [],
+    "image": "https://www.graalvm.org/resources/img/og-image.jpg",
+    "tags": [],
+    "screenshot": "screenshots/8a132467f09b2b064cc861949684daf6.jpg"
+  },
+  {
+    "url": "https://windframe.dev/",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-24T05:01:16.677Z",
+    "messageId": "1442379524166782986",
+    "content": "https://windframe.dev/",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "Windframe - | Tailwind builder | Tailwind CSS page builder | Tailwind Editor | Visual Builder",
+    "description": "Create breathtaking websites, webpages and tailwind templates using our tailwind css builder / Tailwind Editor in record time with over 1000+ easily editable tailwind templates blocks",
+    "descriptionJa": "Tailwind CSS ビルダー/Tailwind Editor を使用して、1000 以上の簡単に編集可能な Tailwind テンプレート ブロックを使用して、息を呑むような Web サイト、Web ページ、Tailwind テンプレートを記録的な速さで作成します。",
+    "metaTags": [
+      "AI",
+      "UI"
+    ],
+    "image": "https://devwares-pull-zone.b-cdn.net/windframe-poster-image-1jj.png",
+    "tags": [
+      "AI",
+      "UI"
+    ],
+    "screenshot": "screenshots/061d7fb67e30cfeca0ad9b836c0ed9fb.jpg"
+  },
+  {
+    "url": "https://github.com/CompassMB/MBCompass",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-21T14:47:28.505Z",
+    "messageId": "1441439881908719667",
+    "content": "https://github.com/CompassMB/MBCompass",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "GitHub - CompassMB/MBCompass: Modern FOSS Compass and Navigation app without Ads, IAP or Tracking",
+    "description": "Modern FOSS Compass and Navigation app without Ads, IAP or Tracking - CompassMB/MBCompass",
+    "descriptionJa": "広告、IAP、追跡なしの最新の FOSS コンパスおよびナビゲーション アプリ - CompassMB/MBCompass",
+    "metaTags": [
+      "GitHub"
+    ],
+    "image": "https://repository-images.githubusercontent.com/830628742/9e7f6fda-3112-4246-923a-dd8a4eff79a9",
+    "tags": [
+      "GitHub"
+    ],
+    "screenshot": "screenshots/72b13ac1606f40860f7361acec7e7a99.jpg"
+  },
+  {
+    "url": "https://antigravity.google/",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-21T14:21:12.894Z",
+    "messageId": "1441433273317331115",
+    "content": "https://antigravity.google/",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "Google Antigravity",
+    "description": "Google Antigravity - Build the new way",
+    "descriptionJa": "Google Antigravity - 新しい方法を構築する",
+    "metaTags": [
+      "Go",
+      "UI"
+    ],
+    "image": "https://antigravity.google/assets/image/sitecards/sitecard-default.png",
+    "tags": [
+      "Go",
+      "UI"
+    ],
+    "screenshot": null
+  },
+  {
+    "url": "https://github.com/straight-tamago/misaka26",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-17T09:27:07.581Z",
+    "messageId": "1439909712048164934",
+    "content": "https://github.com/straight-tamago/misaka26",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "GitHub - straight-tamago/misaka26: iOS /iPadOS 16.0 - 26.1, An ultimate customization tool, uilitizing the bug that makes TrollRestore possible.",
+    "description": "iOS /iPadOS 16.0 - 26.1, An ultimate customization tool, uilitizing the bug that makes TrollRestore possible.  - GitHub - straight-tamago/misaka26: iOS /iPadOS 16.0 - 26.1, An ultimate customizatio...",
+    "descriptionJa": "iOS /iPadOS 16.0 - 26.1、TrollRestore を可能にするバグを利用した究極のカスタマイズ ツール。  - GitHub - Straight-tamago/misaka26: iOS /iPadOS 16.0 - 26.1、究極のカスタマイズ...",
+    "metaTags": [
+      "Go",
+      "GitHub",
+      "AI",
+      "UI",
+      "ツール"
+    ],
+    "image": "https://opengraph.githubassets.com/487cffffb26c9843108b38a41f09b57170f6bdc36baa2b4d2dcc8255ec33ad7f/straight-tamago/misaka26",
+    "tags": [
+      "AI",
+      "GitHub",
+      "Go",
+      "UI",
+      "ツール"
+    ],
+    "screenshot": "screenshots/1074c77589c0493280d3ab8b7de8ad4e.jpg"
+  },
+  {
+    "url": "https://github.com/hanakim3945/bl_sbx",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-15T18:33:22.408Z",
+    "messageId": "1439322403904819374",
+    "content": "https://github.com/hanakim3945/bl_sbx",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "GitHub - hanakim3945/bl_sbx: itunesstored & bookassetd sbx escape",
+    "description": "itunesstored & bookassetd sbx escape. Contribute to hanakim3945/bl_sbx development by creating an account on GitHub.",
+    "descriptionJa": "Itnessored と BookAssetd SBX からの脱出。 GitHub でアカウントを作成して、hanakim3945/BL_SBX 開発に貢献します。",
+    "metaTags": [
+      "GitHub"
+    ],
+    "image": "https://opengraph.githubassets.com/b367099fd2c6ca81497e426f15eab22cd10022829f86dde0ab0855f77de7c24f/hanakim3945/bl_sbx",
+    "tags": [
+      "GitHub"
+    ],
+    "screenshot": "screenshots/55291b5b7365ad55ba1ba0bfb20000bc.jpg"
+  },
+  {
+    "url": "https://github.com/getumbrel/umbrel/releases",
+    "author": {
+      "username": "gorudorenzu",
+      "displayName": "ゴールドレンズ",
+      "id": "526294675422838785",
+      "avatar": "https://cdn.discordapp.com/avatars/526294675422838785/1b82c1362dddf27be5c92439d6d41a10.webp"
+    },
+    "timestamp": "2025-11-14T15:08:45.876Z",
+    "messageId": "1438908524531941537",
+    "content": "https://github.com/getumbrel/umbrel/releases",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "Releases · getumbrel/umbrel",
+    "description": "A beautiful home server OS for self-hosting with an app store. Buy a pre-built Umbrel Home with umbrelOS, or install on a Raspberry Pi or any x86 system. - getumbrel/umbrel",
+    "descriptionJa": "アプリストアを備えたセルフホスティング用の美しいホームサーバー OS。 umbrelOS を備えたビルド済みの Umbrel Home を購入するか、Raspberry Pi または任意の x86 システムにインストールします。 - ゲット傘/傘",
+    "metaTags": [
+      "GitHub",
+      "UI"
+    ],
+    "image": "https://opengraph.githubassets.com/1139a7cb5ede6760d0660f23b9e8b1c3dceaff87fa6b399605b6459611cd4510/getumbrel/umbrel",
+    "tags": [
+      "GitHub",
+      "UI"
+    ],
+    "screenshot": "screenshots/aa5db2612b0bc2e63e67ded350917720.jpg"
+  },
+  {
+    "url": "https://zed.dev/",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-14T09:38:09.542Z",
+    "messageId": "1438825324916768820",
+    "content": "https://zed.dev/",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "Zed — Love your editor again",
+    "description": "Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter.",
+    "descriptionJa": "Zed は、Atom と Tree-sitter の作成者による高性能のマルチプレイヤー コード エディタです。",
+    "metaTags": [
+      "AI"
+    ],
+    "image": "https://zed.dev/img/home/og.webp",
+    "tags": [
+      "AI"
+    ],
+    "screenshot": null
+  },
+  {
+    "url": "https://cursor.com/ja",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-13T14:03:19.084Z",
+    "messageId": "1438529666507079730",
+    "content": "https://cursor.com/ja",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "Cursor",
+    "description": "Built to make you extraordinarily productive, Cursor is the best way to code with AI.",
+    "descriptionJa": "Cursor は、生産性を大幅に向上させるために構築されており、AI を使用してコーディングするための最良の方法です。",
+    "metaTags": [
+      "AI",
+      "UI"
+    ],
+    "image": "https://cursor.com/public/opengraph-image.png",
+    "tags": [
+      "AI",
+      "UI"
+    ],
+    "screenshot": "screenshots/7ec59c2fa09c1e9b48264ae3356c4047.jpg"
+  },
+  {
+    "url": "https://geph.io/en",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-13T09:28:04.001Z",
+    "messageId": "1438460397228130387",
+    "content": "https://geph.io/en",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "Geph",
+    "description": "",
+    "descriptionJa": "",
+    "metaTags": [],
+    "image": "",
+    "tags": [],
+    "screenshot": "screenshots/6317c0d48f78b636b97b77599d254aed.jpg"
+  },
+  {
+    "url": "https://github.com/twofas",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-13T09:27:27.703Z",
+    "messageId": "1438460244983418940",
+    "content": "https://github.com/twofas",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "2FAS",
+    "description": "2FAS has 8 repositories available. Follow their code on GitHub.",
+    "descriptionJa": "2FAS には 8 つのリポジトリが利用可能です。 GitHub でコードをフォローしてください。",
+    "metaTags": [
+      "GitHub",
+      "AI"
+    ],
+    "image": "https://avatars.githubusercontent.com/u/18189374?s=280&v=4",
+    "tags": [
+      "AI",
+      "GitHub"
+    ],
+    "screenshot": "screenshots/29342278cce175cc8215f52c84598cb4.jpg"
+  },
+  {
+    "url": "https://lowtechguys.com/clop",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-13T02:28:16.317Z",
+    "messageId": "1438354752424509510",
+    "content": "https://lowtechguys.com/clop",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "Clop - Image, video, PDF and clipboard optimiser",
+    "description": "Image, video, PDF and clipboard optimiser. Copy large, paste small, send fast",
+    "descriptionJa": "画像、ビデオ、PDF、クリップボードのオプティマイザー。大きくコピー、小さくペースト、高速送信",
+    "metaTags": [
+      "動画"
+    ],
+    "image": "https://img.panaitiu.com/_/1200/plain/https://lowtechguys.com/static/img/clop-screenshot.png",
+    "tags": [
+      "動画"
+    ],
+    "screenshot": "screenshots/429a892c557f2feae24cd52fbf4f186e.jpg"
+  },
+  {
+    "url": "https://github.com/maniacx/Bluetooth-Battery-Meter/tree/SONY",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-13T02:27:03.134Z",
+    "messageId": "1438354445472628749",
+    "content": "https://github.com/maniacx/Bluetooth-Battery-Meter/tree/SONY",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "https://github.com/maniacx/Bluetooth-Battery-Meter/tree/SONY",
+    "description": "",
+    "descriptionJa": "",
+    "metaTags": [
+      "GitHub"
+    ],
+    "image": "",
+    "tags": [
+      "GitHub"
+    ],
+    "screenshot": "screenshots/db2c1fd34a5380f2a7f8f8a5397dac8d.jpg"
+  },
+  {
+    "url": "https://github.com/pwr-Solaar/Solaar",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-13T02:25:56.178Z",
+    "messageId": "1438354164638941285",
+    "content": "https://github.com/pwr-Solaar/Solaar",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "GitHub - pwr-Solaar/Solaar: Linux device manager for Logitech devices",
+    "description": "Linux device manager for Logitech devices. Contribute to pwr-Solaar/Solaar development by creating an account on GitHub.",
+    "descriptionJa": "Logitech デバイス用の Linux デバイス マネージャー。 GitHub でアカウントを作成して、powr-Solaar/Solaar の開発に貢献してください。",
+    "metaTags": [
+      "GitHub",
+      "UX"
+    ],
+    "image": "https://opengraph.githubassets.com/ee5bdc8047bd1cb67b2936d622595997073e7dbd8e2adbbaa602b41d0ed1632d/pwr-Solaar/Solaar",
+    "tags": [
+      "GitHub",
+      "UX"
+    ],
+    "screenshot": "screenshots/39304220f8ebf47e199592c5e40b4889.jpg"
+  },
+  {
+    "url": "https://helium.computer/",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-12T12:37:34.800Z",
+    "messageId": "1438145701950259422",
+    "content": "https://helium.computer/",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "Helium Browser",
+    "description": "The web browser made for people, with love. Best privacy by default, unbiased ad-blocking, no bloat and no noise. Fully open source.",
+    "descriptionJa": "愛を込めて人々のために作られた Web ブラウザ。デフォルトで最高のプライバシー、公平な広告ブロック、肥大化やノイズはありません。完全にオープンソース。",
+    "metaTags": [],
+    "image": "https://helium.computer/embed.png",
+    "tags": [],
+    "screenshot": "screenshots/0663c1719ea1ed5dacdc0e3b6eddee1f.jpg"
+  },
+  {
+    "url": "https://www.oracle.com/jp/cloud/",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-12T02:14:28.977Z",
+    "messageId": "1437988894443442228",
+    "content": "https://www.oracle.com/jp/cloud/",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "Oracle Cloud Infrastructureの詳細",
+    "description": "業界に特化して設計され、必要な場所で利用できるクラウド・ソリューションにより、コストを削減し、効率を最大化することができます。",
+    "descriptionJa": "業界に特化して設計され、必要な場所で利用できるクラウド・ソリューションにより、コストを削減し、効率を最大化することができます。",
+    "metaTags": [],
+    "image": "https://www.oracle.com/a/ocom/img/social-og-oci-logo-1200x628.jpg",
+    "tags": [],
+    "screenshot": "screenshots/e854dbdb9d612b343f47f1b2d5681cc7.jpg"
+  },
+  {
+    "url": "https://huggingface.co/WeiboAI/VibeThinker-1.5B",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-11T07:13:18.501Z",
+    "messageId": "1437701708451942500",
+    "content": "https://huggingface.co/WeiboAI/VibeThinker-1.5B",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "WeiboAI/VibeThinker-1.5B · Hugging Face",
+    "description": "We’re on a journey to advance and democratize artificial intelligence through open source and open science.",
+    "descriptionJa": "私たちは、オープンソースとオープン サイエンスを通じて人工知能を進歩させ、民主化する旅の途中にあります。",
+    "metaTags": [
+      "AI"
+    ],
+    "image": "https://cdn-thumbnails.huggingface.co/social-thumbnails/models/WeiboAI/VibeThinker-1.5B.png",
+    "tags": [
+      "AI"
+    ],
+    "screenshot": "screenshots/60dd8e906e90b0d40e87a66e401257f6.jpg"
+  },
+  {
+    "url": "https://www.xrea.com/",
+    "author": {
+      "username": "gorudorenzu",
+      "displayName": "ゴールドレンズ",
+      "id": "526294675422838785",
+      "avatar": "https://cdn.discordapp.com/avatars/526294675422838785/1b82c1362dddf27be5c92439d6d41a10.webp"
+    },
+    "timestamp": "2025-11-10T12:40:42.611Z",
+    "messageId": "1437421713955487795",
+    "content": "https://www.xrea.com/",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "無料レンタルサーバーで高機能・高品質を実現 | XREAフリー",
+    "description": "XREA（エクスリア）はユーザー側で自由に設定をカスタマイズできる、高い機能性を持った無料から使えるレンタルサーバーです。最新のCPUとSSD搭載で高速化を実現、また、安定したサイト運営が可能です。ワンランク上のウェブサイト、ブログ、商材サイトを目指す方におすすめします。",
+    "descriptionJa": "XREA（エクスリア）はユーザー側で自由に設定をカスタマイズできる、高い機能性を持った無料から使えるレンタルサーバーです。最新のCPUとSSD搭載で高速化を実現、また、安定したサイト運営が可能です。ワンランク上のウェブサイト、ブログ、商材サイトを目指す方におすすめします。",
+    "metaTags": [
+      "ブログ",
+      "レンタルサーバー",
+      "ドメイン",
+      "ホスティング",
+      "Php",
+      "Wordpress"
+    ],
+    "image": "https://www.xrea.com/common/imgs/ogp.png",
+    "tags": [
+      "Php",
+      "Wordpress",
+      "ドメイン",
+      "ブログ",
+      "ホスティング",
+      "レンタルサーバー"
+    ],
+    "screenshot": "screenshots/6ca5eb1c132ca197f1d84a8edc8a3851.jpg"
+  },
+  {
+    "url": "https://syncthing.net/",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-10T10:24:57.767Z",
+    "messageId": "1437387552003723376",
+    "content": "https://syncthing.net/",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "Syncthing",
+    "description": "",
+    "descriptionJa": "",
+    "metaTags": [],
+    "image": "",
+    "tags": [],
+    "screenshot": "screenshots/08efbc137d06163b10e8654570accca8.jpg"
+  },
+  {
+    "url": "https://grafana.com/ja/",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-08T21:21:55.438Z",
+    "messageId": "1436828105967669370",
+    "content": "https://grafana.com/ja/",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "Grafana: オープンでコンポーザブルなオブザーバビリティプラットフォーム | Grafana Labs",
+    "description": "Grafanaは、あらゆるデータベースに対応するオープンソースの分析＆監視ソリューションです。",
+    "descriptionJa": "Grafanaは、あらゆるデータベースに対応するオープンソースの分析＆監視ソリューションです。",
+    "metaTags": [
+      "データベース"
+    ],
+    "image": "https://grafana.com/media/images/meta/grafana-labs-meta-default_1200x630.png",
+    "tags": [
+      "データベース"
+    ],
+    "screenshot": "screenshots/ea5160d2fdeec82b6faa528a50368aab.jpg"
+  },
+  {
+    "url": "https://jellyfin.org/",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-08T21:21:25.249Z",
+    "messageId": "1436827979346088038",
+    "content": "https://jellyfin.org/",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "The Free Software Media System | Jellyfin",
+    "description": "The volunteer-built media solution that puts you in control of your media. Stream to any device from your own server, with no strings attached.",
+    "descriptionJa": "ボランティアによって構築されたメディア ソリューションで、メディアを管理できます。独自のサーバーから任意のデバイスに、文字列を付けずにストリーミングします。",
+    "metaTags": [
+      "UI"
+    ],
+    "image": "https://jellyfin.org/images/social.png?v2",
+    "tags": [
+      "UI"
+    ],
+    "screenshot": "screenshots/d0875696087f0155c4b698f35f116f87.jpg"
+  },
+  {
+    "url": "https://randoma11y.com",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-08T12:25:11.749Z",
+    "messageId": "1436693033906339840",
+    "content": "https://randoma11y.com",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "RandomA11y - Accessible Color Combinations",
+    "description": "Discover millions of accessible color combinations with RandomA11y, the real-time color playground.",
+    "descriptionJa": "リアルタイムの色の遊び場である RandomA11y を使用して、何百万ものアクセス可能な色の組み合わせを見つけてください。",
+    "metaTags": [],
+    "image": "https://randoma11y-feed.adam-f8f.workers.dev/og-image.svg?bg=%23111111&fg=%23FFFFFF",
+    "tags": [],
+    "screenshot": "screenshots/93272a0c0f77c6a887a17707b11690c9.jpg"
+  },
+  {
+    "url": "https://ublockorigin.com/jp",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-08T12:24:07.754Z",
+    "messageId": "1436692765491597395",
+    "content": "https://ublockorigin.com/jp",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "uBlock Origin – フリーかつオープンソースの広告ブロッカー。",
+    "description": "uBlock Originはただの「広告ブロッカー」ではなく、主要機能としてCPUやメモリー効率を備えた広域コンテンツブロッカーです. Developed by Raymond Hill.",
+    "descriptionJa": "uBlock Originはただの「広告ブロッカー」ではなく、主要機能としてCPUやメモリー効率を備えた広域コンテンツブロッカーです. Developed by Raymond Hill.",
+    "metaTags": [],
+    "image": "https://ublockorigin.com/img/favicons/opengraph.png",
+    "tags": [],
+    "screenshot": "screenshots/6edfe45418cd3b0eb794e1f6a2ba1d37.jpg"
+  },
+  {
+    "url": "https://github.com/yt-dlp/yt-dlp",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-08T12:20:26.252Z",
+    "messageId": "1436691836445003908",
+    "content": "https://github.com/yt-dlp/yt-dlp",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "GitHub - yt-dlp/yt-dlp: A feature-rich command-line audio/video downloader",
+    "description": "A feature-rich command-line audio/video downloader - yt-dlp/yt-dlp",
+    "descriptionJa": "機能豊富なコマンドラインのオーディオ/ビデオ ダウンローダー - yt-dlp/yt-dlp",
+    "metaTags": [
+      "GitHub",
+      "動画"
+    ],
+    "image": "https://repository-images.githubusercontent.com/307260205/b6a8d716-9c7b-40ec-bc44-6422d8b741a0",
+    "tags": [
+      "GitHub",
+      "動画"
+    ],
+    "screenshot": "screenshots/1d9d6ca6d40c8b5d9ecaf3222f6aef53.jpg"
+  },
+  {
+    "url": "https://github.com/Vencord/Vesktop",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-08T12:19:17.763Z",
+    "messageId": "1436691549181186059",
+    "content": "https://github.com/Vencord/Vesktop",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "GitHub - Vencord/Vesktop: Vesktop is a custom Discord App aiming to give you better performance and improve linux support",
+    "description": "Vesktop is a custom Discord App aiming to give you better performance and improve linux support - Vencord/Vesktop",
+    "descriptionJa": "Vesktop は、パフォーマンスの向上と Linux サポートの向上を目的としたカスタム Discord アプリです - Vencord/Vesktop",
+    "metaTags": [
+      "GitHub",
+      "AI",
+      "UX"
+    ],
+    "image": "https://opengraph.githubassets.com/d36260bdcebe9757b91026a2d8041b8c9cd13d2532815c68d67f6de5dbd62621/Vencord/Vesktop",
+    "tags": [
+      "AI",
+      "GitHub",
+      "UX"
+    ],
+    "screenshot": "screenshots/c168ca0f9af9aabf4f2c32dc8065d7bf.jpg"
+  },
+  {
+    "url": "https://zen-browser.app/",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-08T12:18:55.823Z",
+    "messageId": "1436691457158414517",
+    "content": "https://zen-browser.app/",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "Zen Browser",
+    "description": "Beautifully designed, privacy-focused, and packed with features.",
+    "descriptionJa": "美しくデザインされ、プライバシーを重視し、豊富な機能が満載です。",
+    "metaTags": [
+      "デザイン"
+    ],
+    "image": "",
+    "tags": [
+      "デザイン"
+    ],
+    "screenshot": "screenshots/3eb877927f0817e0440732328c403294.jpg"
+  },
+  {
+    "url": "https://github.com/Flow-Launcher/Flow.Launcher",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-08T12:16:54.155Z",
+    "messageId": "1436690946845835318",
+    "content": "https://github.com/Flow-Launcher/Flow.Launcher",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "GitHub - Flow-Launcher/Flow.Launcher: :mag: Quick file search & app launcher for Windows with community-made plugins",
+    "description": ":mag: Quick file search & app launcher for Windows with community-made plugins - Flow-Launcher/Flow.Launcher",
+    "descriptionJa": ":mag: コミュニティ作成のプラグインを使用した Windows 用のクイック ファイル検索とアプリ ランチャー - Flow-Launcher/Flow.Launcher",
+    "metaTags": [
+      "GitHub",
+      "UI"
+    ],
+    "image": "https://repository-images.githubusercontent.com/257526212/8a4cf2fd-2c9c-424b-a8b9-4cfef901259b",
+    "tags": [
+      "GitHub",
+      "UI"
+    ],
+    "screenshot": "screenshots/1ce8d9a6eaf1f1974d19ea3aac36d96b.jpg"
+  },
+  {
+    "url": "https://github.com/itorr/homo",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-08T12:15:20.699Z",
+    "messageId": "1436690554862964869",
+    "content": "https://github.com/itorr/homo",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "GitHub - itorr/homo: 💩「恶臭数字论证器」数字恶臭化工具",
+    "description": "💩「恶臭数字论证器」数字恶臭化工具. Contribute to itorr/homo development by creating an account on GitHub.",
+    "descriptionJa": "💩「恶臭数字论证器」数字恶臭化工具. Contribute to itorr/homo development by creating an account on GitHub.",
+    "metaTags": [
+      "GitHub"
+    ],
+    "image": "https://opengraph.githubassets.com/8f6d4962cd97db609ef794bd00c20fe748b4641d48d53bd70b9a30276bec9562/itorr/homo",
+    "tags": [
+      "GitHub"
+    ],
+    "screenshot": "screenshots/fff0e3aaa68e71ca4e27e1e2b7a42901.jpg"
+  },
+  {
+    "url": "https://lab.magiconch.com/homo/",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-08T12:14:33.797Z",
+    "messageId": "1436690358141587466",
+    "content": "https://lab.magiconch.com/homo/",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "恶臭数字论证器",
+    "description": "",
+    "descriptionJa": "",
+    "metaTags": [],
+    "image": "",
+    "tags": [],
+    "screenshot": "screenshots/c6184793e04e82253e2b9399f968c834.jpg"
+  },
+  {
+    "url": "https://github.com/dayanch96/YTLite",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-08T12:10:38.559Z",
+    "messageId": "1436689371481772053",
+    "content": "https://github.com/dayanch96/YTLite",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "GitHub - dayanch96/YTLite: A flexible enhancer for YouTube on iOS",
+    "description": "A flexible enhancer for YouTube on iOS. Contribute to dayanch96/YTLite development by creating an account on GitHub.",
+    "descriptionJa": "iOS 上の YouTube 用の柔軟なエンハンサー。 GitHub でアカウントを作成して、dayanch96/YTLite の開発に貢献してください。",
+    "metaTags": [
+      "GitHub"
+    ],
+    "image": "https://opengraph.githubassets.com/234f330a349202f408eaea1789c6bb7629d0e7023b0e1ed128040f1626d3306a/dayanch96/YTLite",
+    "tags": [
+      "GitHub"
+    ],
+    "screenshot": "screenshots/f1875d3f5ab1c3ccf4c48ab68629e6ad.jpg"
+  },
+  {
+    "url": "https://github.com/NeoFreeBird/app",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-08T12:10:34.694Z",
+    "messageId": "1436689355270787153",
+    "content": "https://github.com/NeoFreeBird/app",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "GitHub - NeoFreeBird/app: A modified Twitter app, with branding reverts, BHTwitter and other QoL modifications.",
+    "description": "A modified Twitter app, with branding reverts, BHTwitter and other QoL modifications. - NeoFreeBird/app",
+    "descriptionJa": "ブランドの元に戻す、BHTwitter、その他の QoL を変更した、変更された Twitter アプリ。 - NeoFreeBird/アプリ",
+    "metaTags": [
+      "GitHub"
+    ],
+    "image": "https://opengraph.githubassets.com/1323d4865abce4a6d12807f6f1dbc90c5054dd81221368d5f670a7c62a652b9c/NeoFreeBird/app",
+    "tags": [
+      "GitHub"
+    ],
+    "screenshot": "screenshots/476e5a0648206538a1e58b0975f718ec.jpg"
+  },
+  {
+    "url": "https://github.com/yokoffing/Betterfox",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-08T10:53:30.443Z",
+    "messageId": "1436669959756451965",
+    "content": "https://github.com/yokoffing/Betterfox",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "GitHub - yokoffing/Betterfox: Firefox user.js for optimal privacy and security. Your favorite browser, but better.",
+    "description": "Firefox user.js for optimal privacy and security. Your favorite browser, but better. - yokoffing/Betterfox",
+    "descriptionJa": "Firefox user.js for optimal privacy and security. Your favorite browser, but better. - yokoffing/Betterfox",
+    "metaTags": [
+      "GitHub",
+      "セキュリティ"
+    ],
+    "image": "https://opengraph.githubassets.com/b74edea0e20951571e8339f9010f027a3c81259092f8f18b42b2c2cb566d7901/yokoffing/Betterfox",
+    "tags": [
+      "GitHub",
+      "セキュリティ"
+    ],
+    "screenshot": "screenshots/a96961b8b3c604672d982e117488c684.jpg"
+  },
+  {
+    "url": "https://github.com/GooseMod/OpenAsar",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-08T10:52:28.217Z",
+    "messageId": "1436669698761687091",
+    "content": "https://github.com/GooseMod/OpenAsar",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "GitHub - GooseMod/OpenAsar: Open-source alternative of Discord desktop's app.asar",
+    "description": "Open-source alternative of Discord desktop's app.asar - GooseMod/OpenAsar",
+    "descriptionJa": "Open-source alternative of Discord desktop's app.asar - GooseMod/OpenAsar",
+    "metaTags": [
+      "Go",
+      "GitHub"
+    ],
+    "image": "https://opengraph.githubassets.com/ba12ad45a9b6e0baa032a3a514377d4f1b02d996197dc222af7b776289f8da40/GooseMod/OpenAsar",
+    "tags": [
+      "GitHub",
+      "Go"
+    ],
+    "screenshot": "screenshots/32a1199ef0ebe72ae046d4a374534827.jpg"
+  },
+  {
+    "url": "https://atlasos.net/",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-08T10:51:12.706Z",
+    "messageId": "1436669382045733015",
+    "content": "https://atlasos.net/",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "AtlasOS - Optimized Windows, designed for enthusiasts.",
+    "description": "AtlasOS is an optimized version of Windows, designed for enthusiasts and gamers. Experience faster performance, better privacy, and enhanced gaming capabilities.",
+    "descriptionJa": "AtlasOS is an optimized version of Windows, designed for enthusiasts and gamers. Experience faster performance, better privacy, and enhanced gaming capabilities.",
+    "metaTags": [
+      "デザイン",
+      "Atlasos",
+      "Gaming performance",
+      "Privacy-focused os",
+      "Windows debloat",
+      "Gaming windows"
+    ],
+    "image": "https://atlasos.net/defaultimg.png",
+    "tags": [
+      "Atlasos",
+      "Gaming performance",
+      "Gaming windows",
+      "Privacy-focused os",
+      "Windows debloat",
+      "デザイン"
+    ],
+    "screenshot": "screenshots/57006fa7a4630bfec3bea1ab375c2a6f.jpg"
+  },
+  {
+    "url": "https://github.com/moudey/shell",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-08T10:50:03.579Z",
+    "messageId": "1436669092105818112",
+    "content": "https://github.com/moudey/shell",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "GitHub - moudey/Shell: Powerful context menu manager for Windows File Explorer",
+    "description": "Powerful context menu manager for Windows File Explorer - moudey/Shell",
+    "descriptionJa": "Powerful context menu manager for Windows File Explorer - moudey/Shell",
+    "metaTags": [
+      "GitHub"
+    ],
+    "image": "https://opengraph.githubassets.com/8aca756fc841fcceabcbac95fa61ae5ca7e9955eaa7f24f9f87bcc6f91da4727/moudey/Shell",
+    "tags": [
+      "GitHub"
+    ],
+    "screenshot": "screenshots/f3efd54266d5b195b18e4b726bcbd8d4.jpg"
+  },
+  {
+    "url": "https://gopeed.com/",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-08T10:49:26.211Z",
+    "messageId": "1436668935373328384",
+    "content": "https://gopeed.com/",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "Gopeed - A modern download manager",
+    "description": "Open source, lightweight, native, supports (HTTP, BitTorrent, Magnet , etc.) for downloading.",
+    "descriptionJa": "Open source, lightweight, native, supports (HTTP, BitTorrent, Magnet , etc.) for downloading.",
+    "metaTags": [
+      "Go",
+      "Gopeed",
+      "Download manager",
+      "Http downloader",
+      "Bt downloader"
+    ],
+    "image": "https://gopeed.com/images/logo.png",
+    "tags": [
+      "Bt downloader",
+      "Download manager",
+      "Go",
+      "Gopeed",
+      "Http downloader"
+    ],
+    "screenshot": "screenshots/85cc1957a2362fc43817faea1b5afefa.jpg"
+  },
+  {
+    "url": "https://github.com/emoacht/Monitorian",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-08T10:47:25.681Z",
+    "messageId": "1436668429833605190",
+    "content": "https://github.com/emoacht/Monitorian",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "GitHub - emoacht/Monitorian: A Windows desktop tool to adjust the brightness of multiple monitors with ease",
+    "description": "A Windows desktop tool to adjust the brightness of multiple monitors with ease - emoacht/Monitorian",
+    "descriptionJa": "A Windows desktop tool to adjust the brightness of multiple monitors with ease - emoacht/Monitorian",
+    "metaTags": [
+      "GitHub",
+      "ツール"
+    ],
+    "image": "https://opengraph.githubassets.com/e57d613e230a3b3d98ec5856922c5b3b2ce87ba0c3b5fc8b49b26e253bf9f5c3/emoacht/Monitorian",
+    "tags": [
+      "GitHub",
+      "ツール"
+    ],
+    "screenshot": "screenshots/8bfef7414798b1a69b1cda65d78539ce.jpg"
+  },
+  {
+    "url": "https://controld.com/free-dns",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-08T10:46:54.473Z",
+    "messageId": "1436668298937761953",
+    "content": "https://controld.com/free-dns",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "Free DNS Servers - Block Ads, Malware, & More",
+    "description": "Free DNS servers from Control D help safeguard your devices from malware, unsecured public wifi, ads, and more. Sign up today and stay safe online.",
+    "descriptionJa": "Free DNS servers from Control D help safeguard your devices from malware, unsecured public wifi, ads, and more. Sign up today and stay safe online.",
+    "metaTags": [],
+    "image": "https://controld.com/social/og_image.png",
+    "tags": [],
+    "screenshot": "screenshots/8fb618719134dfc584d55d4217748c80.jpg"
+  },
+  {
+    "url": "https://nextdns.io/",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-08T10:46:07.552Z",
+    "messageId": "1436668102136823828",
+    "content": "https://nextdns.io/",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "NextDNS",
+    "description": "The new firewall for the modern Internet",
+    "descriptionJa": "The new firewall for the modern Internet",
+    "metaTags": [],
+    "image": "https://nextdns.io/static/og-image.jpg",
+    "tags": [],
+    "screenshot": "screenshots/718254612425a30090f3ef37520e5fe1.jpg"
+  },
+  {
+    "url": "https://cobalt.meowing.de/",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-08T10:41:04.881Z",
+    "messageId": "1436666832642641992",
+    "content": "https://cobalt.meowing.de/",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "cobalt",
+    "description": "cobalt lets you save what you love without ads, tracking, paywalls or other nonsense. just paste the link and you're ready to rock!",
+    "descriptionJa": "cobalt lets you save what you love without ads, tracking, paywalls or other nonsense. just paste the link and you're ready to rock!",
+    "metaTags": [],
+    "image": "",
+    "tags": [],
+    "screenshot": "screenshots/50bdbf667a832b0d763cd541c6d1ef1a.jpg"
+  },
+  {
+    "url": "https://localsend.org/ja",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-08T10:37:20.886Z",
+    "messageId": "1436665893139779614",
+    "content": "https://localsend.org/ja",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "LocalSend：近くのデバイスとファイルを共有",
+    "description": "LocalSend は、近くのデバイスとファイルを共有できる無料のオープンソース・クロスプラットフォームツールです。",
+    "descriptionJa": "LocalSend は、近くのデバイスとファイルを共有できる無料のオープンソース・クロスプラットフォームツールです。",
+    "metaTags": [
+      "ツール"
+    ],
+    "image": "",
+    "tags": [
+      "ツール"
+    ],
+    "screenshot": "screenshots/25c214c00b73fa6723e798591744f4ea.jpg"
+  },
+  {
+    "url": "https://www.cube-soft.jp/cubeice/",
+    "author": {
+      "username": "anertz",
+      "displayName": "Anertz",
+      "id": "620176022469345280",
+      "avatar": "https://cdn.discordapp.com/avatars/620176022469345280/03770901c75cb5d18488d1a90e745e4b.webp"
+    },
+    "timestamp": "2025-11-08T10:37:02.855Z",
+    "messageId": "1436665817512017922",
+    "content": "https://www.cube-soft.jp/cubeice/",
+    "hasAttachments": false,
+    "attachmentCount": 0,
+    "isFavorite": false,
+    "title": "CubeICE | ZIP 圧縮・解凍ソフト (無料)",
+    "description": "CubeICE は Mac で作成された ZIP ファイル等を解凍する時に起こりがちな文字化けを防止できる圧縮・解凍アプリです。AES-256 等で暗号化されたファイルにも対応しています。",
+    "descriptionJa": "CubeICE は Mac で作成された ZIP ファイル等を解凍する時に起こりがちな文字化けを防止できる圧縮・解凍アプリです。AES-256 等で暗号化されたファイルにも対応しています。",
+    "metaTags": [],
+    "image": "https://raw.githubusercontent.com/cube-soft/Cube.Assets/master/cubeice/overview.ja.png",
+    "tags": [],
+    "screenshot": "screenshots/a63ee726cdbd34dca7a2fef66fa70a36.jpg"
+  }
+]
